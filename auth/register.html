@@ -1,0 +1,58 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialSpot - Registro</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container register-page">
+        <div class="logo"></div>
+        
+        <form class="register-form" onsubmit="return handleRegister(event)">
+            <div class="form-group">
+                <label for="username">Nombre de usuario</label>
+                <input type="text" id="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" required>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Registrarse</button>
+        </form>
+        
+        <p class="text-center">¿Ya tienes cuenta? <a href="login.html">Inicia sesión</a></p>
+    </div>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            const user = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if(users.some(u => u.email === user.email)) {
+                alert('El correo ya está registrado');
+                return;
+            }
+            
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Registro exitoso');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
