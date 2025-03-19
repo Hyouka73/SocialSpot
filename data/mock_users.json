@@ -1,0 +1,29 @@
+{
+  "users": {
+    "user123": {
+      "name": "Ana García",
+      "avatar": "avatar1.jpg",
+      "reviewCount": 2
+    },
+    "user456": {
+      "name": "Carlos López",
+      "avatar": "avatar2.jpg",
+      "reviewCount": 2
+    },
+    "user789": {
+      "name": "María Rodríguez",
+      "avatar": "avatar3.jpg",
+      "reviewCount": 1
+    },
+    "user234": {
+      "name": "Juan Pérez",
+      "avatar": "avatar4.jpg",
+      "reviewCount": 1
+    },
+    "user567": {
+      "name": "Laura Torres",
+      "avatar": "avatar5.jpg",
+      "reviewCount": 1
+    }
+  }
+}

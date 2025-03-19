@@ -1,0 +1,51 @@
+<!-- register.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SocialSpot - Registro</title>
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <div class="form-container">
+        <p class="title">Create your account</p>
+        <form class="form" onsubmit="return handleRegister(event)">
+            <input type="text" class="input" placeholder="Username" id="username" required>
+            <input type="email" class="input" placeholder="Email" id="email" required inputmode="email">
+            <input type="password" class="input" placeholder="Password" id="password" required autocomplete="new-password">
+            <button type="submit" class="form-btn">Register</button>
+        </form>
+        <a href="login.html">
+            <p class="sign-up-label">
+                ¿Ya tienes cuenta?<span class="sign-up-link">Inicia sesión</span>
+            </p>
+        </a>
+        <div class="buttons-container">
+            <!-- Opcional: Agrega botones sociales si es necesario -->
+        </div>
+    </div>
+
+    <script>
+        function handleRegister(event) {
+            event.preventDefault();
+            const user = {
+                username: document.getElementById('username').value,
+                email: document.getElementById('email').value,
+                password: document.getElementById('password').value
+            };
+            
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            if(users.some(u => u.email === user.email)) {
+                alert('El correo ya está registrado');
+                return;
+            }
+            
+            users.push(user);
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Registro exitoso');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
