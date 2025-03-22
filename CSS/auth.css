@@ -1,11 +1,24 @@
-/*CSS/auth.css*/
+body {
+    font-family: var(--font-body);
+    background: var(--bg-primary);
+    color: var(--color-primary);
+    line-height: 1.6;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow-x: hidden;
+    margin: 0; /* Asegura que no haya márgenes por defecto */
+}
+
 .form-container {
-    width: 90%;
+    width: 90%; /* Ajusta el ancho para móviles */
+    max-width: 400px; /* Limita el ancho máximo */
     background-color: #fff;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
     box-sizing: border-box;
-    padding: 20px 15px;
+    padding: 20px;
     margin: 20px auto;
 }
 
