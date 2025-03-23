@@ -8,123 +8,71 @@
 </head>
 <body>
     <div class="form-container" id="login-container">
-        <p class="title">Welcome back</p>
-        <form class="form" onsubmit="return handleLogin(event)">
-            <input type="email" class="input" placeholder="Email" id="login-email" inputmode="email" required>
-            <input type="password" class="input" placeholder="Password" id="login-password" autocomplete="current-password" required>
-            <p class="page-link">
-                <span class="page-link-label">Forgot Password?</span>
-            </p>
-            <button type="submit" class="form-btn">Log in</button>
+        <div class="progress-indicator">
+            <div class="active-indicator"></div>
+            <div class="inactive-indicator"></div>
+        </div>
+        
+        <div class="header-text">
+            <h2>Inicio de sesión</h2>
+            <span class="arrow">›</span>
+        </div>
+        
+        <div class="logo-container">
+            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Logo" class="logo">
+            <h1>SocialSpot</h1>
+        </div>
+        
+        <form class="form" id="login-form">
+            <input type="email" class="input" placeholder="Correo Electronico" id="login-email" inputmode="email" required>
+            <input type="password" class="input" placeholder="Contraseña" id="login-password" autocomplete="current-password" required>
+            
+            <button type="submit" class="action-button">INICIA SESIÓN</button>
         </form>
-        <a href="#" onclick="showRegister()">
-            <p class="sign-up-label">
-                Don't have an account?<span class="sign-up-link">Sign up</span>
-            </p>
-        </a>
-        <div class="buttons-container">
-            <div class="apple-login-button">
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" class="apple-icon" viewBox="0 0 1024 1024" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M747.4 535.7c-.4-68.2 30.5-119.6 92.9-157.5-34.9-50-87.7-77.5-157.3-82.8-65.9-5.2-138 38.4-164.4 38.4-27.9 0-91.7-36.6-141.9-36.6C273.1 298.8 163 379.8 163 544.6c0 48.7 8.9 99 26.7 150.8 23.8 68.2 109.6 235.3 199.1 232.6 46.8-1.1 79.9-33.2 140.8-33.2 59.1 0 89.7 33.2 141.9 33.2 90.3-1.3 167.9-153.2 190.5-221.6-121.1-57.1-114.6-167.2-114.6-170.7zm-105.1-305c50.7-60.2 46.1-115 44.6-134.7-44.8 2.6-96.6 30.5-126.1 64.8-32.5 36.8-51.6 82.3-47.5 133.6 48.4 3.7 92.6-21.2 129-63.7z"></path>
-                </svg>
-                <span>Log in with Apple</span>
-            </div>
-            <div class="google-login-button">
-                <svg stroke="currentColor" fill="currentColor" stroke-width="0" version="1.1" x="0px" y="0px" class="google-icon" viewBox="0 0 48 48" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg">
-                    <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12
-  c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24
-  c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
-                    <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657
-  C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
-                    <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36
-  c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
-                    <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571
-  c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
-                </svg>
-                <span>Log in with Google</span>
-            </div>
+        
+        <div class="register-link">
+            <a href="#" id="show-register-btn">REGISTRARSE</a>
+        </div>
+        
+        <div class="social-login">
+            <a href="#" class="social-icon google-icon"><img src="../assets/images/google-icon.png" alt="Google"></a>
+            <a href="#" class="social-icon facebook-icon"><img src="../assets/images/facebook-icon.png" alt="Facebook"></a>
+            <a href="#" class="social-icon twitter-icon"><img src="../assets/images/twitter-icon.png" alt="Twitter"></a>
         </div>
     </div>
 
     <div class="form-container" id="register-container" style="display: none;">
-        <p class="title">Create your account</p>
-        <form class="form" onsubmit="return handleRegister(event)">
-            <input type="text" class="input" placeholder="Username" id="register-username" required>
-            <input type="email" class="input" placeholder="Email" id="register-email" required inputmode="email">
-            <input type="password" class="input" placeholder="Password" id="register-password" required autocomplete="new-password">
-            <button type="submit" class="form-btn">Register</button>
+        <div class="progress-indicator">
+            <div class="inactive-indicator"></div>
+            <div class="active-indicator"></div>
+        </div>
+        
+        <div class="header-text">
+            <a href="#" id="back-btn" class="back-arrow">‹</a>
+            <h2>Registro de usuario</h2>
+            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Mini Logo" class="mini-logo">
+        </div>
+        
+        <div class="register-title">
+            <h3>Crea Una Nueva Cuenta</h3>
+        </div>
+        
+        <form class="form" id="register-form">
+            <input type="text" class="input" placeholder="Nombre/s" id="register-name" required>
+            <input type="text" class="input" placeholder="Apellidos" id="register-lastname" required>
+            <input type="tel" class="input" placeholder="Numero Telefono" id="register-phone" required>
+            <input type="email" class="input" placeholder="Correo Electronico" id="register-email" required inputmode="email">
+            <input type="password" class="input" placeholder="Contraseña" id="register-password" required autocomplete="new-password">
+            <input type="password" class="input" placeholder="Confirmar contraseña" id="register-confirm-password" required autocomplete="new-password">
+            
+            <button type="submit" class="action-button register-btn">REGISTRARSE</button>
         </form>
-        <a href="#" onclick="showLogin()">
-            <p class="sign-up-label">
-                ¿Ya tienes cuenta?<span class="sign-up-link">Inicia sesión</span>
-            </p>
-        </a>
-        <div class="buttons-container">
-            <!-- Opcional: Agrega botones sociales si es necesario -->
+        
+        <div class="login-link">
+            <p>Ya tienes una cuenta? <a href="#" id="show-login-btn">Inicia sesión</a></p>
         </div>
     </div>
 
-    <script>
-        // Mostrar el formulario de registro
-        function showRegister() {
-            document.getElementById('login-container').style.display = 'none';
-            document.getElementById('register-container').style.display = 'block';
-            history.pushState({}, '', '/register'); // Cambia la URL
-        }
-
-        // Mostrar el formulario de login
-        function showLogin() {
-            document.getElementById('register-container').style.display = 'none';
-            document.getElementById('login-container').style.display = 'block';
-            history.pushState({}, '', '/login'); // Cambia la URL
-        }
-
-        // Manejar el registro
-        function handleRegister(event) {
-            event.preventDefault();
-            const user = {
-                username: document.getElementById('register-username').value,
-                email: document.getElementById('register-email').value,
-                password: document.getElementById('register-password').value
-            };
-
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            if (users.some(u => u.email === user.email)) {
-                alert('El correo ya está registrado');
-                return;
-            }
-
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
-            alert('Registro exitoso');
-            showLogin(); // Cambia al formulario de login después del registro
-        }
-
-        // Manejar el login
-        function handleLogin(event) {
-            event.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const password = document.getElementById('login-password').value;
-
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
-
-            if (user) {
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                window.location.href = 'main.html'; // Redirige a la página principal
-            } else {
-                alert('Credenciales incorrectas');
-            }
-        }
-
-        // Cambiar entre formularios según la URL al cargar la página
-        window.addEventListener('load', () => {
-            if (window.location.pathname === '/register') {
-                showRegister();
-            } else {
-                showLogin();
-            }
-        });
-    </script>
+    <script src="../JS/auth.js"></script>
 </body>
 </html>
