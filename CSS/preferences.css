@@ -1,0 +1,44 @@
+.preferences-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.preference-section {
+    margin-bottom: 2rem;
+}
+
+.checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 1rem;
+}
+
+.range-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+}
+
+select, input[type="range"] {
+    width: 100%;
+    margin: 1rem 0;
+}
+
+.finish-button {
+    width: 100%;
+    padding: 1rem;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.1rem;
+}
+
+.finish-button:hover {
+    background: #0056b3;
+}

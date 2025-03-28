@@ -84,7 +84,7 @@ body {
 .front-arrow {
     position: absolute;
     right: 0;
-    font-size: 24px;
+    font-size: 40px;
     margin-left: 10px;
     color: var(--text-color);
 
@@ -93,14 +93,14 @@ body {
 .back-arrow {
     position: absolute;
     left: 0;
-    font-size: 24px;
+    font-size: 40px;
     text-decoration: none;
     color: var(--text-color);
 }
 
 .mini-logo {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     position: absolute;
     right: 0;
 }
@@ -129,6 +129,7 @@ body {
 .register-title {
     width: 100%;
     margin-bottom: 15px;
+    text-align: center;
 }
 
 .register-title h3 {

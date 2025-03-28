@@ -53,22 +53,30 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     // Handle login submission
     if (loginForm) {
-        loginForm.addEventListener('submit', function(e) {
+        loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
 
-            // Get users from local storage
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const user = users.find(u => u.email === email && u.password === password);
+            try {
+                const usersModule = await import('../data/users.js');
+                const users = usersModule.default;
+                
+                // Find user by email and password
+                const userId = Object.keys(users).find(id => 
+                    users[id].email === email && users[id].password === password
+                );
 
-            if (user) {
-                // Store logged in user
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                // Redirect to main page
-                window.location.href = '../main.html';
-            } else {
-                alert('Credenciales incorrectas');
+                if (userId) {
+                    // Store just the user ID as currentUser
+                    localStorage.setItem('currentUser', userId);
+                    window.location.href = '../main.html';
+                } else {
+                    alert('Credenciales incorrectas');
+                }
+            } catch (error) {
+                console.error('Error al cargar los datos de usuarios:', error);
+                alert('Error al iniciar sesión');
             }
         });
     }
@@ -84,37 +92,36 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
 
-            // Validate password match
             if (password !== confirmPassword) {
                 alert('Las contraseñas no coinciden');
                 return;
             }
 
-            // Create user object
             const user = {
+                id: `user${Date.now()}`,
                 name,
                 lastname,
                 phone,
                 email,
                 password,
-                created: new Date().toISOString()
+                created: new Date().toISOString(),
+                preferences: null,
+                avatar: 'default-avatar.jpg',
+                reviewCount: 0
             };
 
-            // Get existing users
             const users = JSON.parse(localStorage.getItem('users')) || [];
             
-            // Check if email already exists
             if (users.some(u => u.email === email)) {
                 alert('El correo ya está registrado');
                 return;
             }
 
-            // Add new user
             users.push(user);
             localStorage.setItem('users', JSON.stringify(users));
+            localStorage.setItem('currentUser', JSON.stringify(user));
             
-            alert('Registro exitoso');
-            showLogin();
+            window.location.href = '../app/preferences.html';
         });
     }
 

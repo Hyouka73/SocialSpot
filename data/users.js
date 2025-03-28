@@ -1,3 +1,16 @@
+const placeTypes = [
+  "Restaurantes",
+  "Bares",
+  "Cafeterías",
+  "Parques",
+  "Museos",
+  "Cines",
+  "Teatros",
+  "Centros Comerciales",
+  "Gimnasios",
+  "Librerías"
+];
+
 const users = {
   user123: {
     name: "Ana García",
@@ -76,4 +89,4 @@ const users = {
   },
 };
 
-export default users;
+export { users as default, placeTypes };

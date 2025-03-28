@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SocialSpot - Preferencias</title>
+    <link rel="stylesheet" href="../css/auth.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="header-text">
+            <h2>Configura tus preferencias</h2>
+            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Mini Logo" class="mini-logo">
+        </div>
+        
+        <form id="preferences-form" class="form">
+            <div class="input-group">
+                <h3>Lugares favoritos</h3>
+                <div id="place-types" class="checkbox-group"></div>
+            </div>
+
+            <div class="input-group">
+                <h3>Presupuesto</h3>
+                <input type="range" id="budget" class="slider" min="1" max="5" step="1">
+                <div class="range-labels">
+                    <span>$</span><span>$$</span><span>$$$</span><span>$$$$</span><span>$$$$$</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <h3>Clima preferido</h3>
+                <select id="weather" class="input">
+                    <option value="any">Cualquiera</option>
+                    <option value="sunny">Soleado</option>
+                    <option value="cloudy">Nublado</option>
+                    <option value="rainy">Lluvioso</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <h3>Frecuencia de salidas</h3>
+                <input type="range" id="frequency" class="slider" min="1" max="7" step="1">
+                <div class="range-labels">
+                    <span>1/semana</span>
+                    <span>7/semana</span>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <h3>Horario preferido</h3>
+                <select id="schedule" class="input" multiple>
+                    <option value="dawn">Madrugada (12am-6am)</option>
+                    <option value="morning">Mañana (6am-12pm)</option>
+                    <option value="afternoon">Tarde (12pm-6pm)</option>
+                    <option value="evening">Noche (6pm-12am)</option>
+                </select>
+            </div>
+
+            <div class="input-group checkbox-container">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="notifications">
+                    Recibir notificaciones
+                </label>
+            </div>
+
+            <button type="submit" class="action-button">¡Listo!</button>
+        </form>
+    </div>
+    <script type="module" src="../JS/preferences.js"></script>
+</body>
+</html>
