@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const showRegisterBtn = document.getElementById('show-register-btn');
     const showLoginBtn = document.getElementById('show-login-btn');
     const backBtn = document.getElementById('back-btn');
+    const frontBtn = document.getElementById('front-btn');
 
     // Show register form
     function showRegister() {
@@ -44,6 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    if (frontBtn) {
+        frontBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            showRegister();
+        });
+    }
     // Handle login submission
     if (loginForm) {
         loginForm.addEventListener('submit', function(e) {

@@ -122,8 +122,8 @@ h1 {
 }
 
 .logo {
-    width: clamp(240px, 40vw, 320px); /* Logo más grande */
-    height: clamp(240px, 40vw, 320px);
+    width: clamp(140px, 40vw, 320px); /* Logo más grande */
+    height: clamp(140px, 40vw, 320px);
     background: url('../assets/images/Social_LogoV1.png') no-repeat center;
     background-size: contain;
     margin: 0 auto 1.5rem;

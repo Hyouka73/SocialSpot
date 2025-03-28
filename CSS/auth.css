@@ -37,7 +37,6 @@ body {
     border-radius: 10px;
     box-sizing: border-box;
     padding: 20px;
-    margin: 20px auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -82,9 +81,13 @@ body {
     color: var(--text-color);
 }
 
-.arrow {
+.front-arrow {
+    position: absolute;
+    right: 0;
     font-size: 24px;
     margin-left: 10px;
+    color: var(--text-color);
+
 }
 
 .back-arrow {
@@ -111,8 +114,8 @@ body {
 }
 
 .logo {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
     margin-bottom: 10px;
 }
 
@@ -233,7 +236,8 @@ body {
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .form-container {
-        width: 95%;
+        width: 100vw;
+        height: 100vh;
         padding: 15px;
     }
     
