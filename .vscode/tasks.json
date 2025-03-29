@@ -1,0 +1,37 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "start-auth",
+            "type": "shell",
+            "command": "cd backend/auth-service && npm start",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "start-places",
+            "type": "shell",
+            "command": "cd backend/places-service && npm start",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "start-comments",
+            "type": "shell",
+            "command": "cd backend/comments-service && npm start",
+            "presentation": {
+                "reveal": "always",
+                "panel": "new"
+            }
+        },
+        {
+            "label": "start-all",
+            "dependsOn": ["start-auth", "start-places", "start-comments"],
+            "dependsOrder": "parallel"
+        }
+    ]
+}

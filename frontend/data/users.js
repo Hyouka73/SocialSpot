@@ -1,20 +1,9 @@
-const placeTypes = [
-  "Restaurantes",
-  "Bares",
-  "Cafeterías",
-  "Parques",
-  "Museos",
-  "Cines",
-  "Teatros",
-  "Centros Comerciales",
-  "Gimnasios",
-  "Librerías"
-];
-
 const users = {
   user123: {
     name: "Ana García",
     email: "ana.garcia@example.com",
+    phone: "123456789",
+    notifications: false,
     password: "ana1234",
     avatar: "avatar1.jpg",
     reviewCount: 2,
@@ -30,6 +19,8 @@ const users = {
   user456: {
     name: "Carlos López",
     email: "carlos.lopez@example.com",
+    phone: "123456789",
+    notifications: false,
     password: "carlos2023",
     avatar: "avatar2.jpg",
     reviewCount: 2,
@@ -45,6 +36,8 @@ const users = {
   user789: {
     name: "María Rodríguez",
     email: "maria.rodriguez@example.com",
+    phone: "123456789",
+    notifications: false,
     password: "maria789",
     avatar: "avatar3.jpg",
     reviewCount: 1,
@@ -60,6 +53,8 @@ const users = {
   user234: {
     name: "Juan Pérez",
     email: "juan.perez@example.com",
+    phone: "123456789",
+    notifications: false,
     password: "juan456",
     avatar: "avatar4.jpg",
     reviewCount: 1,
@@ -75,6 +70,8 @@ const users = {
   user567: {
     name: "Laura Torres",
     email: "laura.torres@example.com",
+    phone: "123456789",
+    notifications: false,
     password: "laura5678",
     avatar: "avatar5.jpg",
     reviewCount: 1,

@@ -1,0 +1,12 @@
+{
+  "name": "app-microservices",
+  "version": "1.0.0",
+  "description": "Microservices application",
+  "scripts": {
+    "start": "concurrently -n \"AUTH,PLACES,COMMENTS\" -c \"yellow,blue,green\" \"cd backend/auth-service && npm start\" \"cd backend/places-service && npm start\" \"cd backend/comments-service && npm start\"",
+    "install-all": "concurrently \"cd backend/auth-service && npm install\" \"cd backend/places-service && npm install\" \"cd backend/comments-service && npm install\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
