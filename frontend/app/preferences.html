@@ -4,66 +4,99 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SocialSpot - Preferencias</title>
-    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/preferences.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="form-container">
-        <div class="header-text">
-            <h2>Configura tus preferencias</h2>
-            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Mini Logo" class="mini-logo">
+    <div id="loading-spinner"></div>
+    <div class="preferences-container">
+        <div class="header">
+            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Logo" class="logo">
+            <h1>Configura tus preferencias</h1>
+            <p>Personaliza tu experiencia en SocialSpot</p>
         </div>
         
-        <form id="preferences-form" class="form">
-            <div class="input-group">
-                <h3>Lugares favoritos</h3>
-                <div id="place-types" class="checkbox-group"></div>
+        <form id="preferences-form" class="preferences-form">
+            <!-- Sección Tipos de Lugares -->
+            <div class="preference-section">
+                <h2><i class="fas fa-map-marker-alt"></i> Lugares favoritos</h2>
+                <p>Selecciona los tipos de lugares que más te gustan</p>
+                <div id="place-types" class="checkbox-grid"></div>
             </div>
 
-            <div class="input-group">
-                <h3>Presupuesto</h3>
-                <input type="range" id="budget" class="slider" min="1" max="5" step="1">
-                <div class="range-labels">
-                    <span>$</span><span>$$</span><span>$$$</span><span>$$$$</span><span>$$$$$</span>
+            <!-- Sección Presupuesto -->
+            <div class="preference-section">
+                <h2><i class="fas fa-money-bill-wave"></i> Rango de precios</h2>
+                <div class="slider-container">
+                    <input type="range" id="price-range" min="1" max="3" value="2" class="slider">
+                    <div class="range-labels">
+                        <span class="price-label" data-value="1">$<br>Económico</span>
+                        <span class="price-label" data-value="2">$$<br>Moderado</span>
+                        <span class="price-label" data-value="3">$$$<br>Premium</span>
+                    </div>
                 </div>
             </div>
 
-            <div class="input-group">
-                <h3>Clima preferido</h3>
-                <select id="weather" class="input">
-                    <option value="any">Cualquiera</option>
-                    <option value="sunny">Soleado</option>
-                    <option value="cloudy">Nublado</option>
-                    <option value="rainy">Lluvioso</option>
-                </select>
+            <!-- Sección Intereses -->
+            <div class="preference-section">
+                <h2><i class="fas fa-heart"></i> Intereses</h2>
+                <div id="interests" class="checkbox-grid"></div>
             </div>
 
-            <div class="input-group">
-                <h3>Frecuencia de salidas</h3>
-                <input type="range" id="frequency" class="slider" min="1" max="7" step="1">
-                <div class="range-labels">
-                    <span>1/semana</span>
-                    <span>7/semana</span>
+            <!-- Sección Frecuencia -->
+            <div class="preference-section">
+                <h2><i class="fas fa-calendar-alt"></i> Frecuencia de salidas</h2>
+                <div class="frequency-options">
+                    <label class="radio-option">
+                        <input type="radio" name="frequency" value="1" checked>
+                        <span>1-2 veces por semana</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frequency" value="2">
+                        <span>3-4 veces por semana</span>
+                    </label>
+                    <label class="radio-option">
+                        <input type="radio" name="frequency" value="3">
+                        <span>5+ veces por semana</span>
+                    </label>
                 </div>
             </div>
 
-            <div class="input-group">
-                <h3>Horario preferido</h3>
-                <select id="schedule" class="input" multiple>
-                    <option value="dawn">Madrugada (12am-6am)</option>
-                    <option value="morning">Mañana (6am-12pm)</option>
-                    <option value="afternoon">Tarde (12pm-6pm)</option>
-                    <option value="evening">Noche (6pm-12am)</option>
-                </select>
+            <!-- Sección Horario -->
+            <div class="preference-section">
+                <h2><i class="fas fa-clock"></i> Horario preferido</h2>
+                <div class="time-options">
+                    <select id="preferred-time" class="styled-select">
+                        <option value="morning">Mañana (6am-12pm)</option>
+                        <option value="afternoon" selected>Tarde (12pm-6pm)</option>
+                        <option value="evening">Noche (6pm-12am)</option>
+                        <option value="flexible">Cualquier horario</option>
+                    </select>
+                </div>
             </div>
 
-            <div class="input-group checkbox-container">
-                <label class="checkbox-label">
-                    <input type="checkbox" id="notifications">
-                    Recibir notificaciones
-                </label>
+            <!-- Sección Configuraciones -->
+            <div class="preference-section settings-section">
+                <h2><i class="fas fa-cog"></i> Configuraciones</h2>
+                <div class="toggle-options">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="notifications" checked>
+                        <span class="slider-toggle"></span>
+                        <span class="toggle-label">Recibir notificaciones</span>
+                    </label>
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="dark-mode">
+                        <span class="slider-toggle"></span>
+                        <span class="toggle-label">Modo oscuro</span>
+                    </label>
+                </div>
             </div>
 
-            <button type="submit" class="action-button">¡Listo!</button>
+            <div class="form-actions">
+                <button type="submit" class="save-button">
+                    <i class="fas fa-save"></i> Guardar preferencias
+                </button>
+            </div>
         </form>
     </div>
     <script type="module" src="../JS/preferences.js"></script>

@@ -1,5 +1,8 @@
+// Importa la URL base desde config.js (asegúrate de crear este archivo)
+import { API_USER_URL } from '../config.js'; // Asegúrate de que el archivo config.js exista y tenga la exportación correcta
+
 document.addEventListener('DOMContentLoaded', function() {
-    // Get form elements
+    // Get form elements (mantengo esta parte igual)
     const loginContainer = document.getElementById('login-container');
     const registerContainer = document.getElementById('register-container');
     const loginForm = document.getElementById('login-form');
@@ -9,21 +12,20 @@ document.addEventListener('DOMContentLoaded', function() {
     const backBtn = document.getElementById('back-btn');
     const frontBtn = document.getElementById('front-btn');
 
-    // Show register form
+    // Show register form y show login form (mantengo estas funciones igual)
     function showRegister() {
         loginContainer.style.display = 'none';
         registerContainer.style.display = 'flex';
-        history.pushState({}, '', '/register');
+        history.pushState({}, '', '/frontend/auth/register.html'); // Ajusta la ruta
     }
 
-    // Show login form
     function showLogin() {
         registerContainer.style.display = 'none';
         loginContainer.style.display = 'flex';
-        history.pushState({}, '', '/login');
+        history.pushState({}, '', '/frontend/auth/login.html'); // Ajusta la ruta
     }
 
-    // Event listeners for switching forms
+    // Event listeners para switching forms (mantengo igual)
     if (showRegisterBtn) {
         showRegisterBtn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -51,7 +53,8 @@ document.addEventListener('DOMContentLoaded', function() {
             showRegister();
         });
     }
-    // Handle login submission
+
+    // Handle login submission con API
     if (loginForm) {
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -59,31 +62,36 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
 
             try {
-                const usersModule = await import('../data/users.js');
-                const users = usersModule.default;
-                
-                // Find user by email and password
-                const userId = Object.keys(users).find(id => 
-                    users[id].email === email && users[id].password === password
-                );
+                const response = await fetch(`${API_USER_URL}login`, { // Asegúrate de que la URL sea correcta
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ email, password })
+                });
 
-                if (userId) {
-                    // Store just the user ID as currentUser
-                    localStorage.setItem('currentUser', userId);
-                    window.location.href = '../main.html';
-                } else {
-                    alert('Credenciales incorrectas');
+                if (!response.ok) {
+                    const errorText = await response.text(); // Lee el texto de la respuesta
+                    throw new Error(errorText || 'Error al iniciar sesión');
                 }
+
+                const data = await response.json(); // Intenta parsear la respuesta como JSON
+
+                // Guardar el token y userId en localStorage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('currentUser', data.userId);
+                window.location.href = '../main.html';
+
             } catch (error) {
-                console.error('Error al cargar los datos de usuarios:', error);
-                alert('Error al iniciar sesión');
+                console.error('Error al iniciar sesión:', error);
+                alert(error.message || 'Error al iniciar sesión');
             }
         });
     }
 
-    // Handle register submission
+    // Handle register submission con API
     if (registerForm) {
-        registerForm.addEventListener('submit', function(e) {
+        registerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
             const name = document.getElementById('register-name').value;
             const lastname = document.getElementById('register-lastname').value;
@@ -91,52 +99,59 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
+            const sex = document.getElementById('register-sexo').value; // Nuevo campo
 
             if (password !== confirmPassword) {
                 alert('Las contraseñas no coinciden');
                 return;
             }
 
-            const user = {
-                id: `user${Date.now()}`,
-                name,
-                lastname,
-                phone,
-                email,
-                password,
-                created: new Date().toISOString(),
-                preferences: null,
-                avatar: 'default-avatar.jpg',
-                reviewCount: 0
-            };
+            try {
+                const response = await fetch(`${API_USER_URL}register`, { // Asegúrate de que la URL sea correcta
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        firstName: name,
+                        lastName: lastname,
+                        phone,
+                        email,
+                        password,
+                        sex // Incluye el nuevo campo
+                    })
+                });
 
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            
-            if (users.some(u => u.email === email)) {
-                alert('El correo ya está registrado');
-                return;
+                if (!response.ok) {
+                    const errorText = await response.text(); // Lee el texto de la respuesta
+                    throw new Error(errorText || 'Error al registrarse');
+                }
+
+                const data = await response.json(); // Intenta parsear la respuesta como JSON
+
+                // Guardar el token en localStorage
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('currentUser', data.userId || data.token);
+                window.location.href = '../app/preferences.html';
+
+            } catch (error) {
+                console.error('Error al registrarse:', error);
+                alert(error.message || 'Error al registrarse');
             }
-
-            users.push(user);
-            localStorage.setItem('users', JSON.stringify(users));
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            
-            window.location.href = '../app/preferences.html';
         });
     }
 
-    // Change between forms based on URL on page load
+    // Mantengo el resto del código igual
     window.addEventListener('load', function() {
-        if (window.location.pathname === '/register') {
+        if (window.location.pathname.endsWith('register.html')) { // Ajusta la ruta
             showRegister();
         } else {
             showLogin();
         }
     });
 
-    // Handle browser back button
     window.addEventListener('popstate', function() {
-        if (window.location.pathname === '/register') {
+        if (window.location.pathname.endsWith('register.html')) { // Ajusta la ruta
             showRegister();
         } else {
             showLogin();

@@ -31,7 +31,7 @@
         </form>
         
         <div class="register-link">
-            <a href="#" id="show-register-btn">Registrarse</a>
+            <a href="#" id="show-register-btn">Registrarse</a> <!-- Cambia href si es necesario -->
         </div>
         
         <div class="social-login">
@@ -64,7 +64,12 @@
             <input type="email" class="input" placeholder="Correo Electronico" id="register-email" required inputmode="email">
             <input type="password" class="input" placeholder="Contraseña" id="register-password" required autocomplete="new-password">
             <input type="password" class="input" placeholder="Confirmar contraseña" id="register-confirm-password" required autocomplete="new-password">
-            
+            <select class="input" id="register-sexo" required>
+                <option value="" disabled selected>Selecciona tu sexo</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
             <button type="submit" class="action-button register-btn">Registrarse</button>
         </form>
         
@@ -73,6 +78,6 @@
         </div>
     </div>
 
-    <script src="../JS/auth.js"></script>
+    <script src="../JS/auth.js" type="module"></script> <!-- Asegúrate de usar type="module" -->
 </body>
 </html>
