@@ -8,6 +8,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
+    <script>
+        // Redirigir después de 2.5 segundos
+        setTimeout(function() {
+            window.location.href = "auth/login.html";
+        }, 2500);
+    </script>
 </head>
 <body>
     <div class="container landing-page">
@@ -17,9 +23,7 @@
             <p class="slogan">Encuentra los lugares de tu agrado con un simple click</p>
         </div>
         
-        <div class="nav-links">
-            <a href="auth/login.html" class="btn btn-primary link-animation">Ingresar</a>
-        </div>
+        <!-- Eliminado el div con el botón de ingreso -->
     </div>
 </body>
 </html>
