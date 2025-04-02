@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Guardar el token y userId en localStorage
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('currentUser', data.userId);
-                window.location.href = '../main.html';
+                window.location.href = '../app/main.html';
 
             } catch (error) {
                 console.error('Error al iniciar sesión:', error);
