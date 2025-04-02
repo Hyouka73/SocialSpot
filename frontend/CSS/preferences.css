@@ -339,3 +339,86 @@ input:checked + .slider-toggle:before {
         flex-direction: column;
     }
 }
+body.dark-mode {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+    --light-grey: #444;
+    --dark-grey: #aaa;
+    --input-border: #555;
+}
+
+body.dark-mode .preferences-container {
+    background: #1e1e1e;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .header h1 {
+    color: var(--secondary-color);
+}
+
+body.dark-mode .header p,
+body.dark-mode .preference-section p {
+    color: #d0d0d0;
+}
+
+body.dark-mode .preference-section {
+    border-bottom-color: #444;
+}
+
+body.dark-mode .checkbox-grid label {
+    background: #252525;
+    border-color: #444;
+}
+
+body.dark-mode .checkbox-grid label:hover {
+    background: #333;
+    border-color: var(--secondary-color);
+}
+
+body.dark-mode .radio-option {
+    background: #252525;
+    border-color: #444;
+}
+
+body.dark-mode .radio-option:hover {
+    background: #333;
+}
+
+body.dark-mode .styled-select {
+    background-color: #252525;
+    color: var(--text-color);
+    border-color: #555;
+}
+
+body.dark-mode .toggle-label {
+    color: var(--text-color);
+}
+
+body.dark-mode .slider {
+    background: #555;
+}
+
+body.dark-mode .price-label {
+    color: var(--text-color);
+}
+
+/* Ajustes específicos para elementos interactivos */
+body.dark-mode input:not([type="checkbox"]):not([type="radio"]),
+body.dark-mode textarea,
+body.dark-mode select {
+    background-color: #252525;
+    color: var(--text-color);
+}
+
+/* Mantén estos estilos al final del archivo */
+@media (max-width: 768px) {
+    body.dark-mode .preferences-container {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body.dark-mode .checkbox-grid {
+        grid-template-columns: 1fr;
+    }
+}

@@ -250,3 +250,69 @@ body {
         padding: 12px 15px;
     }
 }
+body.dark-mode {
+    background-color: var(--dm-bg);
+    color: var(--dm-text);
+}
+
+body.dark-mode .form-container {
+    background-color: var(--dm-card);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode .logo-container h1,
+body.dark-mode .header-text h2,
+body.dark-mode .register-title h3,
+body.dark-mode .register-link a,
+body.dark-mode .front-arrow,
+body.dark-mode .back-arrow {
+    color: var(--dm-text);
+}
+
+body.dark-mode .input {
+    background-color: var(--dm-input-bg);
+    color: var(--dm-text);
+    border-color: var(--dm-border);
+}
+
+body.dark-mode .input:focus {
+    border-color: var(--dm-primary);
+}
+
+body.dark-mode .action-button {
+    background-color: var(--dm-primary);
+    color: #121212;
+}
+
+body.dark-mode .action-button:hover {
+    background-color: #7ab9cb;
+}
+
+body.dark-mode .login-link a {
+    color: var(--dm-primary);
+}
+
+body.dark-mode .active-indicator {
+    background-color: var(--dm-primary);
+}
+
+body.dark-mode .inactive-indicator {
+    background-color: #555;
+}
+
+/* Ajustes específicos para el texto "Correo Electrónico | Contraseña" */
+body.dark-mode .form label {
+    color: var(--dm-text-secondary);
+}
+
+/* Ajustes para los separadores */
+body.dark-mode hr {
+    border-color: var(--dm-border);
+}
+
+/* Ajustes responsivos para modo oscuro */
+@media (max-width: 768px) {
+    body.dark-mode .form-container {
+        border-radius: 0;
+    }
+}
