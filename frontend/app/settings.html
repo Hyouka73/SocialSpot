@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajustes | SocialSpot</title>
+    <link rel="stylesheet" href="../CSS/settings.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="settings-container">
+        <!-- Header con logo -->
+        <div class="settings-header">
+            <div class="back-button">
+                <a href="../app/main.html"><i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="logo-container">
+                <h1>SocialSpot</h1>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+        
+        <!-- Información del usuario -->
+        <div class="user-info">
+            <div class="user-avatar">
+                <i class="fas fa-user-circle"></i>
+            </div>
+            <div class="user-details">
+                <h2>Usuario #455</h2>
+                <p class="user-email">usuario@socialspot.com</p>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+
+        <!-- Configuraciones principales -->
+        <div class="settings-section">
+            <h3 class="section-title">Configuración</h3>
+            
+            <div class="option">
+                <div class="option-icon">
+                    <i class="fas fa-bell"></i>
+                </div>
+                <label class="custom-checkbox">
+                    <input type="checkbox" id="notifications" checked>
+                    <span class="checkmark"></span>
+                    Notificaciones
+                </label>
+            </div>
+            
+            <div class="option">
+                <div class="option-icon">
+                    <i class="fas fa-moon"></i>
+                </div>
+                <label class="custom-checkbox">
+                    <input type="checkbox" id="dark-mode" class="dark-mode-switch">
+                    <span class="checkmark"></span>
+                    Modo oscuro
+                </label>
+            </div>
+        </div>
+        
+        <div class="divider"></div>
+
+        <!-- Seguridad -->
+        <div class="settings-section">
+            <h3 class="section-title">Seguridad</h3>
+            
+            <button id="change-password" class="btn option-btn">
+                <div class="option-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                Cambiar contraseña
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <button id="change-email" class="btn option-btn">
+                <div class="option-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                Cambiar correo electrónico
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+        
+        <div class="divider"></div>
+
+        <!-- Legal -->
+        <div class="settings-section">
+            <h3 class="section-title">Legal</h3>
+            
+            <a href="../app/legals/privacy.html" class="btn option-btn">
+                <div class="option-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                Avisos de privacidad
+                <i class="fas fa-chevron-right"></i>
+            </a>
+            
+            <a href="../app/legals/terms.html" class="btn option-btn">
+                <div class="option-icon">
+                    <i class="fas fa-file-contract"></i>
+                </div>
+                Términos y condiciones
+                <i class="fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+        <div class="divider"></div>
+
+        <!-- Acciones de cuenta -->
+        <div class="settings-section">
+            <h3 class="section-title">Cuenta</h3>
+            
+            <button id="logout" class="btn option-btn logout-btn">
+                <div class="option-icon">
+                    <i class="fas fa-sign-out-alt"></i>
+                </div>
+                Cerrar Sesión
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <button id="deactivate-account" class="btn option-btn warning-btn">
+                <div class="option-icon">
+                    <i class="fas fa-user-slash"></i>
+                </div>
+                Desactivar cuenta
+                <i class="fas fa-chevron-right"></i>
+            </button>
+            
+            <button id="delete-account" class="btn option-btn danger-btn">
+                <div class="option-icon">
+                    <i class="fas fa-user-times"></i>
+                </div>
+                Eliminar cuenta
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <script src="../JS/settings.js"></script>
+</body>
+</html>

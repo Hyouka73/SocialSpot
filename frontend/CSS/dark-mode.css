@@ -1,0 +1,55 @@
+/* dark-mode.css */
+:root {
+    /* Colores para modo oscuro */
+    --dm-bg: #121212;
+    --dm-card: #1e1e1e;
+    --dm-text: #f8f9fa;
+    --dm-text-secondary: #adb5bd;
+    --dm-divider: #333;
+    --dm-primary: #4361ee;
+    --dm-hover: rgba(255, 255, 255, 0.05);
+  }
+  
+  body.dark-mode {
+    background-color: var(--dm-bg);
+    color: var(--dm-text);
+  }
+  
+  body.dark-mode .preferences-container,
+  body.dark-mode .settings-container,
+  body.dark-mode .legal-container {
+    background-color: var(--dm-card);
+  }
+  
+  body.dark-mode h1, 
+  body.dark-mode h2,
+  body.dark-mode h3,
+  body.dark-mode p {
+    color: var(--dm-text);
+  }
+  
+  body.dark-mode .preference-section,
+  body.dark-mode .term-card,
+  body.dark-mode .settings-section {
+    background-color: var(--dm-card);
+    border-color: var(--dm-divider);
+  }
+  
+  body.dark-mode .styled-select,
+  body.dark-mode input:not([type="checkbox"]),
+  body.dark-mode textarea {
+    background-color: var(--dm-card);
+    color: var(--dm-text);
+    border-color: var(--dm-divider);
+  }
+  
+  /* Componentes específicos (ej. switches) */
+  body.dark-mode .toggle-switch {
+    background-color: var(--dm-divider);
+  }
+  
+  body.dark-mode .toggle-switch .slider-toggle {
+    background-color: var(--dm-primary);
+  }
+  
+  /* Añade aquí todos los componentes que necesiten modo oscuro */

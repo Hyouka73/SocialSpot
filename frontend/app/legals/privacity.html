@@ -1,0 +1,129 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacidad | SocialSpot</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/settings.css">
+    <link rel="stylesheet" href="legal.css">
+</head>
+<body>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            if(localStorage.getItem('darkMode') === 'enabled') {
+                document.body.classList.add('dark-mode');
+            }
+        });
+    </script>
+    
+    <div class="legal-container">
+        <div class="legal-header">
+            <a href="../settings.html" class="back-button"><i class="fas fa-arrow-left"></i></a>
+            <div class="header-title">
+                <h1>Aviso de Privacidad</h1>
+                <p class="last-updated">Última actualización: 15/06/2025</p>
+            </div>
+        </div>
+
+        <div class="legal-content">
+            <div class="highlight-box animated-box">
+                <i class="fas fa-shield-alt pulse"></i>
+                <p>En SocialSpot protegemos tus datos personales con los más altos estándares de seguridad.</p>
+            </div>
+
+            <section class="legal-section">
+                <h2><i class="fas fa-database"></i>¿Qué información recopilamos?</h2>
+                <div class="term-card slide-in">
+                    <div class="info-grid">
+                        <div class="info-item">
+                            <i class="fas fa-user-circle"></i>
+                            <h3>Datos personales</h3>
+                            <ul>
+                                <li>Nombre y correo electrónico</li>
+                                <li>Foto de perfil (opcional)</li>
+                                <li>Preferencias de uso</li>
+                            </ul>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <h3>Datos de ubicación</h3>
+                            <ul>
+                                <li>Solo cuando nos das permiso</li>
+                                <li>Para recomendaciones personalizadas</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="legal-section">
+                <h2><i class="fas fa-lock"></i>¿Cómo protegemos tus datos?</h2>
+                <div class="term-card security-card">
+                    <div class="security-features">
+                        <div class="feature">
+                            <i class="fas fa-key"></i>
+                            <h3>Encriptación</h3>
+                            <p>Todos tus datos están protegidos con cifrado AES-256</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-server"></i>
+                            <h3>Almacenamiento seguro</h3>
+                            <p>Servidores protegidos en la UE</p>
+                        </div>
+                        <div class="feature">
+                            <i class="fas fa-user-shield"></i>
+                            <h3>Acceso restringido</h3>
+                            <p>Solo personal autorizado puede acceder a tu información</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="legal-section">
+                <h2><i class="fas fa-chart-line"></i>Uso de tus datos</h2>
+                <div class="term-card">
+                    <div class="usage-diagram">
+                        <div class="usage-item">
+                            <i class="fas fa-user-check"></i>
+                            <p>Mejorar tu experiencia</p>
+                        </div>
+                        <div class="usage-item">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <p>Recomendaciones personalizadas</p>
+                        </div>
+                        <div class="usage-item">
+                            <i class="fas fa-bell"></i>
+                            <p>Notificaciones relevantes</p>
+                        </div>
+                    </div>
+                    <div class="warning-box animated-box">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <p><strong>Nunca</strong> vendemos tu información a terceros</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="legal-section">
+                <h2><i class="fas fa-question-circle"></i>¿Tienes dudas?</h2>
+                <div class="term-card contact-card">
+                    <div class="contact-method">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Escríbenos</h3>
+                        <p><a href="mailto:privacidad@socialspot.com">privacidad@socialspot.com</a></p>
+                    </div>
+                    <div class="contact-method">
+                        <i class="fas fa-phone"></i>
+                        <h3>Llámanos</h3>
+                        <p>+34 123 456 789</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
+
+

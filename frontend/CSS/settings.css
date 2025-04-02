@@ -1,0 +1,310 @@
+:root {
+    /* Colores principales */
+    --primary-color: #4361ee; /* Azul similar al login */
+    --secondary-color: #3f37c9;
+    --accent-color: #4895ef;
+    --danger-color: #f72585;
+    --warning-color: #f77f00;
+    --success-color: #4cc9f0;
+    
+    /* Modo claro */
+    --bg-light: #f8f9fa;
+    --card-light: #ffffff;
+    --text-light: #333333;
+    --text-secondary-light: #6c757d;
+    --divider-light: #e9ecef;
+    
+    /* Modo oscuro */
+    --bg-dark: #121212;
+    --card-dark: #1e1e1e;
+    --text-dark: #f8f9fa;
+    --text-secondary-dark: #adb5bd;
+    --divider-dark: #333333;
+    
+    /* Valores actuales */
+    --bg-color: var(--bg-light);
+    --card-color: var(--card-light);
+    --text-color: var(--text-light);
+    --text-secondary: var(--text-secondary-light);
+    --divider-color: var(--divider-light);
+}
+
+/* Estilos base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+body.dark-mode {
+    --bg-color: var(--bg-dark);
+    --card-color: var(--card-dark);
+    --text-color: var(--text-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --divider-color: var(--divider-dark);
+}
+
+.settings-container {
+    background-color: var(--card-color);
+    max-width: 500px;
+    margin: 0 auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+/* Header */
+.settings-header {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+}
+
+.back-button a {
+    color: var(--text-color);
+    font-size: 20px;
+    margin-right: 15px;
+    text-decoration: none;
+}
+
+.logo-container {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.logo-container h1 {
+    color: var(--primary-color);
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* Divisor */
+.divider {
+    height: 1px;
+    background-color: var(--divider-color);
+    margin: 0 20px;
+    transition: background-color 0.3s ease;
+}
+
+/* Información del usuario */
+.user-info {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+}
+
+.user-avatar {
+    margin-right: 15px;
+}
+
+.user-avatar i {
+    font-size: 50px;
+    color: var(--primary-color);
+}
+
+.user-details h2 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.user-email {
+    color: var(--text-secondary);
+    font-size: 14px;
+}
+
+/* Secciones */
+.settings-section {
+    padding: 10px 0;
+}
+
+.section-title {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-secondary);
+    padding: 0 20px 10px;
+    margin-bottom: 5px;
+}
+
+/* Opciones */
+.option {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+}
+
+.option-icon {
+    width: 24px;
+    margin-right: 15px;
+    text-align: center;
+    color: var(--primary-color);
+}
+
+.custom-checkbox {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.custom-checkbox input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    background-color: transparent;
+    border: 2px solid var(--text-secondary);
+    border-radius: 5px;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.custom-checkbox input:checked ~ .checkmark {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 6px;
+    top: 2px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.custom-checkbox input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Botones de opción */
+.option-btn {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 15px 20px;
+    background: none;
+    border: none;
+    color: var(--text-color);
+    text-align: left;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.option-btn:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-mode .option-btn:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.option-btn i.fa-chevron-right {
+    margin-left: auto;
+    color: var(--text-secondary);
+}
+
+/* Botones especiales */
+.logout-btn {
+    color: var(--primary-color);
+}
+
+.warning-btn {
+    color: var(--warning-color);
+}
+
+.danger-btn {
+    color: var(--danger-color);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
+    .settings-container {
+        border-radius: 10px;
+    }
+    
+    .user-avatar i {
+        font-size: 40px;
+    }
+    
+    .user-details h2 {
+        font-size: 16px;
+    }
+    
+    .user-email {
+        font-size: 12px;
+    }
+    
+    .option, .option-btn {
+        padding: 12px 15px;
+    }
+    /* settings.css - Parte del modo oscuro */
+:root {
+    /* Colores modo claro */
+    --bg-color: #f8f9fa;
+    --card-color: #ffffff;
+    --text-color: #333333;
+    --text-secondary: #6c757d;
+    --divider-color: #e9ecef;
+    
+    /* Colores modo oscuro */
+    --bg-color-dark: #121212;
+    --card-color-dark: #1e1e1e;
+    --text-color-dark: #f8f9fa;
+    --text-secondary-dark: #adb5bd;
+    --divider-color-dark: #333333;
+}
+
+/* Aplicar variables según modo */
+html {
+    --bg-color: var(--bg-color-light);
+    --card-color: var(--card-color-light);
+    --text-color: var(--text-color-light);
+    --text-secondary: var(--text-secondary-light);
+    --divider-color: var(--divider-color-light);
+}
+
+html.dark-mode {
+    --bg-color: var(--bg-color-dark);
+    --card-color: var(--card-color-dark);
+    --text-color: var(--text-color-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --divider-color: var(--divider-color-dark);
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s, color 0.3s;
+}
+}
+
+
+
+
+
