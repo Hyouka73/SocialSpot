@@ -1,22 +1,93 @@
-</html><!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Aplicación</title>
+    <title>SocialSpot</title>
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <nav>
-        <a href="maps-detail.html" class="btn">Mapas</a>
-        <a href="settings.html" class="btn">Ajustes</a>
-        <a href="friends.html" class="btn">Amigos</a>
-    </nav>
+    <div class="app-container">
+        <!-- Header con logo, búsqueda y ajustes -->
+        <header class="app-header">
+            <div class="logo-small">
+                <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Logo">
+            </div>
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-input" placeholder="Buscar">
+                    <button id="location-btn" class="location-button">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </button>
+                </div>
+            </div>
+            <a href="settings.html" class="settings-button">
+                <i class="fas fa-cog"></i>
+            </a>
+        </header>
 
-    <div id="content">
-        <!-- Aquí irá el contenido principal de tu aplicación -->
-        <h1>Bienvenido a tu aplicación</h1>
-        <p>Selecciona una opción en la barra de navegación para comenzar.</p>
+
+        <!-- Filtros -->
+        <div class="filters-container">
+            <div class="filter-pills">
+                <button class="filter-pill active" data-filter="abierto">Abierto ahora</button>
+                <button class="filter-pill" data-filter="precio-bajo">$ Económico</button>
+                <button class="filter-pill" data-filter="precio-medio">$$ Moderado</button>
+                <button class="filter-pill" data-filter="precio-alto">$$$ Premium</button>
+                <button class="filter-pill" data-filter="mejor-valorados">⭐ Mejor valorados</button>
+                <button class="filter-pill" data-filter="mascotas">🐾 Pet friendly</button>
+                <button class="filter-pill" data-filter="accesible">♿ Accesible</button>
+                <button class="filter-pill" data-filter="estacionamiento">🅿️ Estacionamiento</button>
+                <button class="filter-pill" data-filter="wifi">📶 WiFi</button>
+            </div>
+            <button class="filter-more-btn">
+                <i class="fas fa-filter"></i>
+            </button>
+        </div>
+
+
+        <!-- Contenido principal -->
+        <main class="main-content">
+            <div id="loading-spinner" class="loading-spinner">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Las secciones se generarán dinámicamente aquí -->
+            <div id="places-sections-container"></div>
+        </main>
+
+
+        <!-- Barra de navegación inferior -->
+        <nav class="bottom-nav">
+            <a href="main.html" class="nav-item active">
+                <i class="fas fa-home"></i>
+            </a>
+            <a href="profile.html" class="nav-item">
+                <i class="fas fa-user"></i>
+            </a>
+        </nav>
     </div>
+
+
+    <!-- Template para las tarjetas de lugares -->
+    <template id="place-card-template">
+        <div class="place-card">
+            <div class="place-info">
+                <h3 class="place-name"></h3>
+                <div class="place-rating">
+                    <div class="stars-container"></div>
+                </div>
+            </div>
+            <div class="place-image">
+                <img src="" alt="">
+            </div>
+        </div>
+    </template>
+
+
+    <script type="module" src="../JS/main.js"></script>
 </body>
 </html>

@@ -1,0 +1,583 @@
+/* Estilos para la página principal */
+.app-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    max-width: 500px;
+    margin: 0 auto;
+    background: linear-gradient(135deg, #EBF4F5 0%, #B5C6E0 100%);
+    position: relative;
+}
+
+
+/* Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    gap: 12px;
+    flex-wrap: nowrap;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+
+.logo-small {
+    width: 45px;
+    height: 45px;
+    flex-shrink: 0;
+    margin-left: 5px;
+}
+
+
+.logo-small img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+
+.search-container {
+    flex: 1;
+    min-width: 0; /* Permite que el contenedor se encoja */
+}
+
+
+.search-box {
+    display: flex;
+    align-items: center;
+    background-color: #f0f2f5;
+    border-radius: 25px;
+    padding: 12px 20px;
+    position: relative;
+    width: 100%;
+    min-width: 0;
+}
+
+
+.search-icon {
+    color: #8e8e93;
+    margin-right: 12px;
+    font-size: 18px;
+}
+
+
+#search-input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    min-width: 0;
+}
+
+
+.location-button {
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0 8px;
+}
+
+
+.settings-button {
+    margin-left: 15px;
+    color: #333;
+    font-size: 24px;
+    text-decoration: none;
+    padding: 8px;
+    margin-right: 5px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* Filtros */
+.filters-container {
+    display: flex;
+    padding: 10px 15px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid #e1e4e8;
+}
+
+
+.filter-pills {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    flex: 1;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+
+.filter-pills::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera */
+}
+
+
+.filter-pill {
+    background: rgba(255, 255, 255, 0.8);
+    color: #2C5282;
+    border: 1px solid #90CDF4;
+    padding: 10px 18px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    min-height: 44px; /* Mínimo recomendado para touch targets */
+    padding: 8px 20px;
+}
+
+.filter-pill:active {
+    transform: scale(0.95);
+    transition: transform 0.2s ease;
+}
+
+.filter-pill:hover {
+    transform: none;
+    border-color: currentColor;
+    background: none;
+}
+
+.filter-pill.active {
+    background: linear-gradient(135deg, #4299E1 0%, #2B6CB0 100%);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 4px 15px rgba(66, 153, 225, 0.3);
+}
+
+
+.filter-more-btn {
+    background: none;
+    border: none;
+    color: #666;
+    font-size: 18px;
+    cursor: pointer;
+    margin-left: 5px;
+}
+
+
+/* Contenido principal */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+
+.places-section {
+    margin-bottom: 35px;
+    padding: 20px 5px;
+    background: transparent;
+    border-radius: 0;
+    box-shadow: none;
+    animation: sectionFadeIn 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+@keyframes sectionFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.places-section h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1a365d;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 3px solid #4299e1;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+.places-container {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+
+/* Tarjetas de lugares */
+.place-card {
+    display: flex;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    height: 120px;
+    transition: all 0.3s ease;
+    position: relative;
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(147, 197, 253, 0.3);
+    backdrop-filter: blur(12px);
+    transform-origin: center;
+    animation: cardAppear 0.3s ease-out;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent; /* Elimina el highlight en móviles */
+}
+
+@keyframes cardAppear {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.place-card:active {
+    transform: scale(0.98);
+    transition: transform 0.2s ease;
+}
+
+.place-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    opacity: 0.95; /* Aumentar opacidad base */
+    transition: opacity 0.3s ease;
+}
+
+/* Gradientes por tipo de lugar */
+.place-card[data-type="Restaurantes"]::before {
+    background: linear-gradient(135deg, #63B3ED 0%, #4299E1 100%);
+}
+
+.place-card[data-type="Bares"]::before {
+    background: linear-gradient(135deg, #4299E1 0%, #2B6CB0 100%);
+}
+
+.place-card[data-type="Cafeterías"]::before {
+    background: linear-gradient(135deg, #90CDF4 0%, #63B3ED 100%);
+}
+
+.place-card[data-type="Parques"]::before {
+    background: linear-gradient(135deg, #9AE6B4 0%, #48BB78 100%);
+}
+
+.place-card[data-type="Museos"]::before {
+    background: linear-gradient(135deg, #76A9FA 0%, #3182CE 100%);
+}
+
+.place-card[data-type="Cines"]::before {
+    background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+}
+
+.place-card[data-type="Teatros"]::before {
+    background: linear-gradient(135deg, #c471f5 0%, #fa71cd 100%);
+}
+
+.place-card[data-type="Centros Comerciales"]::before {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.place-card[data-type="Gimnasios"]::before {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+.place-card[data-type="Librerías"]::before {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.place-card:hover {
+    transform: none;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.place-card:hover::before {
+    opacity: 0.95;
+}
+
+.place-card:hover .place-image img {
+    transform: none;
+}
+
+.place-card .touch-ripple {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    transform: scale(0);
+    pointer-events: none;
+    z-index: 2;
+}
+
+.place-info {
+    position: relative;
+    z-index: 1;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    padding: 16px;
+    flex: 1;
+}
+
+
+.place-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #2d3436;
+}
+
+
+.place-rating {
+    display: flex;
+    align-items: center;
+}
+
+
+.stars-container {
+    display: flex;
+}
+
+
+.star {
+    color: #ffc107;
+    font-size: 16px;
+    margin-right: 2px;
+}
+
+
+.place-image {
+    width: 140px;
+    height: 120px;
+    position: relative;
+    z-index: 1;
+}
+
+
+.place-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+
+/* Barra de navegación inferior */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 15px 0;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.05);
+    position: sticky;
+    bottom: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+
+.nav-item {
+    color: #8e8e93;
+    text-decoration: none;
+    font-size: 28px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px 16px;
+    transition: color 0.3s ease;
+    min-height: 44px;
+    position: relative;
+    overflow: hidden;
+}
+
+.nav-item:active {
+    opacity: 0.7;
+}
+
+.nav-item.active {
+    color: var(--primary-color);
+}
+
+
+/* Spinner de carga */
+.loading-spinner {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 100;
+}
+
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: var(--primary-color);
+    animation: spin 1s ease-in-out infinite;
+}
+
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .app-container {
+        max-width: 100%;
+        padding: 0;
+    }
+
+
+    .app-header {
+        padding: 12px 10px;
+        gap: 10px;
+    }
+
+
+    .logo-small {
+        width: 40px;
+        height: 40px;
+    }
+
+
+    .search-box {
+        padding: 10px 15px;
+    }
+
+
+    #search-input {
+        font-size: 15px;
+    }
+
+
+    .settings-button {
+        font-size: 22px;
+        padding: 6px;
+    }
+
+
+    .filters-container {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+
+    .filter-pill {
+        flex: 1 1 calc(50% - 10px);
+        text-align: center;
+    }
+
+
+    .places-container {
+        gap: 10px;
+    }
+
+
+    .place-card {
+        flex-direction: column;
+        height: auto;
+    }
+
+
+    .place-image {
+        width: 100%;
+        height: 150px;
+    }
+
+
+    .place-info {
+        padding: 10px;
+    }
+
+    .nav-item {
+        font-size: 26px;
+        padding: 6px 12px;
+    }
+}
+
+
+@media (max-width: 480px) {
+    .app-header {
+        padding: 10px 8px;
+        gap: 8px;
+    }
+
+
+    .logo-small {
+        width: 35px;
+        height: 35px;
+    }
+
+
+    .search-box {
+        padding: 8px 12px;
+    }
+
+
+    .search-icon {
+        font-size: 16px;
+    }
+
+
+    .location-button {
+        font-size: 18px;
+        padding: 0 6px;
+    }
+
+
+    .settings-button {
+        font-size: 20px;
+        padding: 5px;
+        margin-right: 3px;
+    }
+
+
+    .filter-pill {
+        flex: 1 1 100%;
+    }
+
+
+    .place-image {
+        height: 120px;
+    }
+
+
+    .place-name {
+        font-size: 14px;
+    }
+
+
+    .star {
+        font-size: 14px;
+    }
+
+    .nav-item {
+        font-size: 24px;
+        padding: 5px 10px;
+    }
+}
