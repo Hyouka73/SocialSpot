@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         const token = localStorage.getItem('token');
         if (!token) {
-            window.location.href = '../auth/login.html';
+            window.location.href = '/frontend/auth/login.html';
             return;
         }
 
@@ -95,15 +95,15 @@ function renderPlaces(places, containerId) {
         // Configurar imagen con manejo de rutas
         const imgElement = placeCard.querySelector('.place-image img');
         if (place.image) {
-            // Asumiendo que las imágenes están en frontend/assets/perfiles/
+            // Usar ruta absoluta para la imagen
             const imageName = place.image.split('\\').pop(); // Obtiene solo el nombre del archivo
-            imgElement.src = `../assets/perfiles/${imageName}`;
+            imgElement.src = `/frontend/assets/perfiles/${imageName}`;
             imgElement.onerror = function() {
                 console.warn(`No se pudo cargar la imagen: ${place.image}`);
-                this.src = '../assets/images/placeholder.jpg';
+                this.src = '/frontend/assets/images/placeholder.jpg';
             };
         } else {
-            imgElement.src = '../assets/images/placeholder.jpg';
+            imgElement.src = '/frontend/assets/images/placeholder.jpg';
         }
         imgElement.alt = place.name;
 
@@ -115,7 +115,8 @@ function renderPlaces(places, containerId) {
         card.addEventListener('touchstart', createRippleEffect);
         card.addEventListener('touchend', removeRippleEffect);
         card.addEventListener('click', () => {
-            window.location.href = `map-detail.html?id=${place._id}`;
+            console.log(`Redirigiendo a map-detail.html con ID: ${place._id}`); // Depuración
+            window.location.href = `/mapa/app/map-detail.html?id=${place._id}`; // Pasar el ID del lugar
         });
         
         container.appendChild(placeCard);
@@ -184,6 +185,23 @@ function renderStars(container, rating) {
         emptyStar.className = 'far fa-star star';
         container.appendChild(emptyStar);
     }
+}
+
+// Función para configurar la búsqueda
+function setupSearch(places) {
+    const searchInput = document.getElementById('search-input');
+    searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredPlaces = places.filter(place => 
+            place.name.toLowerCase().includes(searchTerm)
+        );
+        updateDisplayedPlaces(filteredPlaces);
+    });
+}
+
+// Función para mostrar alertas
+function showAlert(message, type) {
+    alert(message);
 }
 
 function setupFilters(places) {

@@ -22,7 +22,7 @@ async function fetchCurrentUser() {
     currentUser = { 
       firstName: 'Usuario', 
       lastName: 'Desconocido', 
-      avatar: '/assets/images/user-placeholder.png', // Ruta absoluta para el placeholder
+      avatar: '/frontend/assets/images/user-placeholder.png', // Ruta absoluta para el placeholder
       _id: '66f8e3b2c1d4f5a2b3c4d5e6' // ID de respaldo
     };
   }
@@ -33,10 +33,28 @@ async function fetchPlacesAndComments() {
     // Obtener todos los lugares desde el backend
     const placesResponse = await fetch('http://localhost:3002/api/places');
     if (!placesResponse.ok) throw new Error(`Error en /api/places: ${placesResponse.statusText}`);
-    const places = await placesResponse.json();
+    let places = await placesResponse.json();
     console.log('Lugares obtenidos:', places); // Depuración
 
-    // Obtener comentarios para cada lugar y los datos de los usuarios
+    // Obtener el parámetro 'id' de la URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const placeId = urlParams.get('id');
+    if (placeId) {
+      places = places.filter(place => place._id === placeId);
+      if (places.length === 0) {
+        console.error(`No se encontró un lugar con el ID ${placeId}`);
+        alert('Lugar no encontrado. Redirigiendo a la página principal.');
+        window.location.href = '/frontend/app/main.html';
+        return;
+      }
+    } else {
+      console.error('No se proporcionó un ID de lugar en la URL');
+      alert('No se especificó un lugar. Redirigiendo a la página principal.');
+      window.location.href = '/frontend/app/main.html';
+      return;
+    }
+
+    // Obtener comentarios para el lugar seleccionado y los datos de los usuarios
     const placesWithComments = await Promise.all(
       places.map(async (place) => {
         try {
@@ -53,7 +71,7 @@ async function fetchPlacesAndComments() {
                   console.warn(`userId inválido en comentario ${comment._id}: ${comment.userId}`);
                   return {
                     ...comment,
-                    user: { firstName: 'Usuario', lastName: 'Desconocido', avatar: '/assets/images/user-placeholder.png' }
+                    user: { firstName: 'Usuario', lastName: 'Desconocido', avatar: '/frontend/assets/images/user-placeholder.png' }
                   };
                 }
                 const userResponse = await fetch(`http://localhost:3001/api/users/${comment.userId}`);
@@ -62,7 +80,7 @@ async function fetchPlacesAndComments() {
                 }
                 const user = await userResponse.json();
                 // Ajustar la ruta del avatar del usuario
-                const userAvatar = user.avatar ? `/${user.avatar.replace(/\\/g, '/')}` : '/assets/images/user-placeholder.png';
+                const userAvatar = user.avatar ? `/${user.avatar.replace(/\\/g, '/')}` : '/frontend/assets/images/user-placeholder.png';
                 return {
                   ...comment,
                   user: {
@@ -75,7 +93,7 @@ async function fetchPlacesAndComments() {
                 console.error(`Error al obtener usuario para comentario ${comment._id}:`, error);
                 return {
                   ...comment,
-                  user: { firstName: 'Usuario', lastName: 'Desconocido', avatar: '/assets/images/user-placeholder.png' }
+                  user: { firstName: 'Usuario', lastName: 'Desconocido', avatar: '/frontend/assets/images/user-placeholder.png' }
                 };
               }
             })
@@ -87,6 +105,7 @@ async function fetchPlacesAndComments() {
             console.log(`Ruta ajustada de la imagen para ${place.name}: ${place.image}`);
           } else {
             console.warn(`No se encontró imagen para ${place.name}, usando imagen por defecto.`);
+            place.image = '/frontend/assets/images/default-place.jpg';
           }
 
           return { ...place, comments };
@@ -100,16 +119,22 @@ async function fetchPlacesAndComments() {
     initializeMap(placesWithComments);
   } catch (error) {
     console.error('Error al cargar datos:', error);
+    alert('Error al cargar el mapa. Redirigiendo a la página principal.');
+    window.location.href = '/frontend/app/main.html';
   }
 }
 
 function initializeMap(places) {
   if (!places || places.length === 0) {
     console.error('No hay lugares para mostrar:', places);
+    alert('No se encontraron lugares. Redirigiendo a la página principal.');
+    window.location.href = '/frontend/app/main.html';
     return;
   }
 
-  const map = L.map('map').setView([19.4326, -99.1332], 13);
+  // Centrar el mapa en el lugar seleccionado y ajustar el zoom
+  const place = places[0]; // Solo hay un lugar después del filtrado
+  const map = L.map('map').setView([place.coordinates.latitude, place.coordinates.longitude], 15); // Zoom más cercano
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
   }).addTo(map);
@@ -141,7 +166,7 @@ function initializeMap(places) {
             font-weight: bold;
           ">${place.name}</span>
         </div>
-        <img src="${place.image || '/assets/icons/green-marker.png'}" style="width: 38px; height: 38px; position: relative; top: -10px; object-fit: cover;" alt="${place.name}" onerror="this.src='/assets/icons/green-marker.png'; console.error('Error al cargar imagen para ${place.name}: ${place.image}');">
+        <img src="${place.image || '/frontend/assets/icons/green-marker.png'}" style="width: 38px; height: 38px; position: relative; top: -10px; object-fit: cover;" alt="${place.name}" onerror="this.src='/frontend/assets/icons/green-marker.png'; console.error('Error al cargar imagen para ${place.name}: ${place.image}');">
       `,
       iconSize: [100, 50],
       iconAnchor: [50, 50],
@@ -156,7 +181,7 @@ function initializeMap(places) {
       document.getElementById('location-name').textContent = place.name;
       document.getElementById('location-address').textContent = `Dirección: ${place.address || 'No disponible'}`;
       const locationImage = document.getElementById('location-image');
-      locationImage.src = place.image || '/assets/images/default-place.jpg';
+      locationImage.src = place.image || '/frontend/assets/images/default-place.jpg';
       locationImage.alt = place.name;
       locationImage.classList.remove('hidden');
       document.getElementById('location-info').classList.remove('hidden');
@@ -168,6 +193,9 @@ function initializeMap(places) {
 
       document.querySelector('.details-container').classList.add('visible');
     });
+
+    // Opcional: Simular un clic automático en el marcador para mostrar la información del lugar al cargar
+    marker.fire('click');
   });
 
   function displayComments(comments) {
@@ -190,7 +218,7 @@ function initializeMap(places) {
         ? `${currentUser.firstName} ${currentUser.lastName}`
         : `${comment.user.firstName} ${comment.user.lastName}`;
       const userAvatar = comment.userId === currentUser._id
-        ? (currentUser.avatar || '/assets/images/user-placeholder.png')
+        ? (currentUser.avatar || '/frontend/assets/images/user-placeholder.png')
         : comment.user.avatar;
       const hasLiked = userLikes.has(comment._id.toString());
       commentDiv.innerHTML = `
