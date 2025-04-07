@@ -1,8 +1,6 @@
-// Importa la URL base desde config.js (asegúrate de crear este archivo)
-import { API_USER_URL } from '../config.js'; // Asegúrate de que el archivo config.js exista y tenga la exportación correcta
+import { API_USER_URL } from '../config.js';
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Get form elements (mantengo esta parte igual)
     const loginContainer = document.getElementById('login-container');
     const registerContainer = document.getElementById('register-container');
     const loginForm = document.getElementById('login-form');
@@ -12,20 +10,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const backBtn = document.getElementById('back-btn');
     const frontBtn = document.getElementById('front-btn');
 
-    // Show register form y show login form (mantengo estas funciones igual)
     function showRegister() {
         loginContainer.style.display = 'none';
         registerContainer.style.display = 'flex';
-        history.pushState({}, '', '/frontend/auth/register.html'); // Ajusta la ruta
+        history.pushState({}, '', '/frontend/auth/register.html');
     }
 
     function showLogin() {
         registerContainer.style.display = 'none';
         loginContainer.style.display = 'flex';
-        history.pushState({}, '', '/frontend/auth/login.html'); // Ajusta la ruta
+        history.pushState({}, '', '/frontend/auth/login.html');
     }
 
-    // Event listeners para switching forms (mantengo igual)
     if (showRegisterBtn) {
         showRegisterBtn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -54,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle login submission con API
     if (loginForm) {
         loginForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -62,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
 
             try {
-                const response = await fetch(`${API_USER_URL}login`, { // Asegúrate de que la URL sea correcta
+                const response = await fetch(`${API_USER_URL}login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -71,17 +66,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
 
                 if (!response.ok) {
-                    const errorText = await response.text(); // Lee el texto de la respuesta
+                    const errorText = await response.text();
                     throw new Error(errorText || 'Error al iniciar sesión');
                 }
 
-                const data = await response.json(); // Intenta parsear la respuesta como JSON
-
-                // Guardar el token y userId en localStorage
+                const data = await response.json();
                 localStorage.setItem('token', data.token);
                 localStorage.setItem('currentUser', data.userId);
                 window.location.href = '../app/main.html';
-
             } catch (error) {
                 console.error('Error al iniciar sesión:', error);
                 alert(error.message || 'Error al iniciar sesión');
@@ -89,7 +81,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle register submission con API
     if (registerForm) {
         registerForm.addEventListener('submit', async function(e) {
             e.preventDefault();
@@ -99,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const email = document.getElementById('register-email').value;
             const password = document.getElementById('register-password').value;
             const confirmPassword = document.getElementById('register-confirm-password').value;
-            const sex = document.getElementById('register-sexo').value; // Nuevo campo
+            const sex = document.getElementById('register-sexo').value;
 
             if (password !== confirmPassword) {
                 alert('Las contraseñas no coinciden');
@@ -107,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch(`${API_USER_URL}register`, { // Asegúrate de que la URL sea correcta
+                const response = await fetch(`${API_USER_URL}register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -118,22 +109,19 @@ document.addEventListener('DOMContentLoaded', function() {
                         phone,
                         email,
                         password,
-                        sex // Incluye el nuevo campo
+                        sex
                     })
                 });
 
                 if (!response.ok) {
-                    const errorText = await response.text(); // Lee el texto de la respuesta
+                    const errorText = await response.text();
                     throw new Error(errorText || 'Error al registrarse');
                 }
 
-                const data = await response.json(); // Intenta parsear la respuesta como JSON
-
-                // Guardar el token en localStorage
+                const data = await response.json();
                 localStorage.setItem('token', data.token);
-                localStorage.setItem('currentUser', data.userId || data.token);
+                localStorage.setItem('currentUser', data.userId); // Asegurarnos de usar data.userId
                 window.location.href = '../app/preferences.html';
-
             } catch (error) {
                 console.error('Error al registrarse:', error);
                 alert(error.message || 'Error al registrarse');
@@ -141,9 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Mantengo el resto del código igual
     window.addEventListener('load', function() {
-        if (window.location.pathname.endsWith('register.html')) { // Ajusta la ruta
+        if (window.location.pathname.endsWith('register.html')) {
             showRegister();
         } else {
             showLogin();
@@ -151,7 +138,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     window.addEventListener('popstate', function() {
-        if (window.location.pathname.endsWith('register.html')) { // Ajusta la ruta
+        if (window.location.pathname.endsWith('register.html')) {
             showRegister();
         } else {
             showLogin();

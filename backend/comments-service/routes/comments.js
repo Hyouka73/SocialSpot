@@ -6,9 +6,13 @@ const router = express.Router();
 router.get('/', async (req, res) => {
   const { placeId } = req.query;
   try {
+    if (!placeId) {
+      return res.status(400).json({ error: 'El placeId es requerido' });
+    }
     const comments = await Comment.find({ placeId });
     res.json(comments);
   } catch (err) {
+    console.error('Error al obtener comentarios:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -17,15 +21,17 @@ router.get('/', async (req, res) => {
 router.post('/', async (req, res) => {
   const { text, userId, placeId, rating } = req.body;
   try {
-    const comment = new Comment({ text, userId, placeId, rating });
-    await comment.save();
+    // Validar los campos requeridos
+    if (!text || !userId || !placeId || !rating) {
+      return res.status(400).json({ error: 'Faltan campos requeridos' });
+    }
 
-    // Actualizar el lugar con el nuevo comentario
-    const Place = require('../models/Place'); // Asegúrate de que el modelo Place esté disponible
-    await Place.findByIdAndUpdate(placeId, { $push: { comments: comment._id } });
+    const comment = new Comment({ text, userId, placeId, rating, likes: [] });
+    const savedComment = await comment.save();
 
-    res.status(201).json(comment);
+    res.status(201).json(savedComment);
   } catch (err) {
+    console.error('Error al crear comentario:', err);
     res.status(500).json({ error: err.message });
   }
 });
@@ -34,24 +40,31 @@ router.post('/', async (req, res) => {
 router.post('/:commentId/like', async (req, res) => {
   try {
     const { userId } = req.body;
-    const comment = await Comment.findById(req.params.commentId);
+    const commentId = req.params.commentId;
 
+    if (!userId) {
+      return res.status(400).json({ error: 'El userId es requerido' });
+    }
+
+    const comment = await Comment.findById(commentId);
     if (!comment) {
       return res.status(404).json({ message: 'Comentario no encontrado' });
     }
 
-    // Verificar si el usuario ya dio "like"
+    // Asegurarse de que likes sea un array
+    if (!Array.isArray(comment.likes)) {
+      comment.likes = [];
+    }
+
     const userIndex = comment.likes.indexOf(userId);
     if (userIndex === -1) {
-      // Agregar "like"
       comment.likes.push(userId);
     } else {
-      // Quitar "like"
       comment.likes.splice(userIndex, 1);
     }
 
-    await comment.save();
-    res.json({ likes: comment.likes });
+    const updatedComment = await comment.save();
+    res.json(updatedComment); // Devolver el comentario completo
   } catch (error) {
     console.error('Error al manejar el like:', error);
     res.status(500).json({ message: 'Error interno del servidor' });

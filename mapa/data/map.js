@@ -1,42 +1,36 @@
-// Almacenar los likes del usuario autenticado
-let userLikes = new Set(); // Almacena los IDs de los comentarios a los que el usuario ha dado "like"
-let currentUser = null; // Almacenar los datos del usuario autenticado
+let userLikes = new Set();
+let currentUser = null;
 
-// Obtener el usuario autenticado al cargar la página
 async function fetchCurrentUser() {
   try {
-    // Obtener el userId desde localStorage (clave 'currentUser' según auth.js)
-    const userId = localStorage.getItem('currentUser') || '66f8e3b2c1d4f5a2b3c4d5e6'; // Fallback por si no hay usuario autenticado
+    const userId = localStorage.getItem('currentUser');
+    if (!userId) {
+      throw new Error('No se encontró un usuario autenticado en localStorage');
+    }
     const response = await fetch(`http://localhost:3001/api/users/${userId}`);
     if (!response.ok) throw new Error('Error al obtener el usuario autenticado');
     currentUser = await response.json();
-    // Ajustar la ruta del avatar del usuario autenticado
     if (currentUser.avatar) {
       currentUser.avatar = `/${currentUser.avatar.replace(/\\/g, '/')}`;
       console.log(`Ruta ajustada del avatar para el usuario autenticado: ${currentUser.avatar}`);
     }
     console.log('Usuario autenticado:', currentUser);
-    userLikes = new Set(); // Reiniciar los likes
+    userLikes = new Set();
   } catch (error) {
     console.error('Error al cargar el usuario autenticado:', error);
-    currentUser = { 
-      firstName: 'Usuario', 
-      lastName: 'Desconocido', 
-      avatar: '/frontend/assets/images/user-placeholder.png', // Ruta absoluta para el placeholder
-      _id: '66f8e3b2c1d4f5a2b3c4d5e6' // ID de respaldo
-    };
+    alert('No se pudo cargar el usuario autenticado. Redirigiendo al login.');
+    window.location.href = '/frontend/auth/login.html';
+    return;
   }
 }
 
 async function fetchPlacesAndComments() {
   try {
-    // Obtener todos los lugares desde el backend
     const placesResponse = await fetch('http://localhost:3002/api/places');
     if (!placesResponse.ok) throw new Error(`Error en /api/places: ${placesResponse.statusText}`);
     let places = await placesResponse.json();
-    console.log('Lugares obtenidos:', places); // Depuración
+    console.log('Lugares obtenidos:', places);
 
-    // Obtener el parámetro 'id' de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const placeId = urlParams.get('id');
     if (placeId) {
@@ -54,16 +48,14 @@ async function fetchPlacesAndComments() {
       return;
     }
 
-    // Obtener comentarios para el lugar seleccionado y los datos de los usuarios
     const placesWithComments = await Promise.all(
       places.map(async (place) => {
         try {
           const commentsResponse = await fetch(`http://localhost:3003/api/comments?placeId=${place._id}`);
           if (!commentsResponse.ok) throw new Error(`Error en /api/comments para ${place._id}: ${commentsResponse.statusText}`);
           let comments = await commentsResponse.json();
-          console.log(`Comentarios para ${place.name} (placeId: ${place._id}):`, comments); // Depuración
+          console.log(`Comentarios para ${place.name} (placeId: ${place._id}):`, comments);
 
-          // Obtener los datos de los usuarios para cada comentario
           comments = await Promise.all(
             comments.map(async (comment) => {
               try {
@@ -79,8 +71,10 @@ async function fetchPlacesAndComments() {
                   throw new Error(`Error al obtener el usuario: ${userResponse.statusText}`);
                 }
                 const user = await userResponse.json();
-                // Ajustar la ruta del avatar del usuario
                 const userAvatar = user.avatar ? `/${user.avatar.replace(/\\/g, '/')}` : '/frontend/assets/images/user-placeholder.png';
+                if (comment.likes && Array.isArray(comment.likes) && comment.likes.includes(currentUser._id)) {
+                  userLikes.add(comment._id.toString());
+                }
                 return {
                   ...comment,
                   user: {
@@ -99,7 +93,6 @@ async function fetchPlacesAndComments() {
             })
           );
 
-          // Ajustar la ruta de la imagen del lugar
           if (place.image) {
             place.image = `/${place.image.replace(/\\/g, '/')}`;
             console.log(`Ruta ajustada de la imagen para ${place.name}: ${place.image}`);
@@ -132,9 +125,8 @@ function initializeMap(places) {
     return;
   }
 
-  // Centrar el mapa en el lugar seleccionado y ajustar el zoom
-  const place = places[0]; // Solo hay un lugar después del filtrado
-  const map = L.map('map').setView([place.coordinates.latitude, place.coordinates.longitude], 15); // Zoom más cercano
+  const place = places[0];
+  const map = L.map('map').setView([place.coordinates.latitude, place.coordinates.longitude], 15);
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 18,
   }).addTo(map);
@@ -143,7 +135,6 @@ function initializeMap(places) {
   let selectedRating = 0;
 
   places.forEach(place => {
-    // Crear un marcador personalizado usando place.image
     const markerIcon = L.divIcon({
       className: 'custom-marker',
       html: `
@@ -194,7 +185,6 @@ function initializeMap(places) {
       document.querySelector('.details-container').classList.add('visible');
     });
 
-    // Opcional: Simular un clic automático en el marcador para mostrar la información del lugar al cargar
     marker.fire('click');
   });
 
@@ -205,12 +195,13 @@ function initializeMap(places) {
     const locationImage = document.getElementById('location-image');
     const commentsTitle = document.getElementById('comments-title');
     locationImage.classList.add('hidden');
-    commentsTitle.classList.add('hidden'); // Asegurarse de que el título esté oculto al mostrar los comentarios
+    commentsTitle.classList.add('hidden');
 
     if (!comments || comments.length === 0) {
       commentsList.innerHTML = '<p>No hay comentarios disponibles.</p>';
       return;
     }
+
     comments.forEach(comment => {
       const commentDiv = document.createElement('div');
       commentDiv.className = 'comment';
@@ -232,24 +223,38 @@ function initializeMap(places) {
                  class="like-icon" 
                  data-comment-id="${comment._id}" 
                  style="cursor: pointer; width: 20px; height: 20px;">
-            <span class="likes-count">${comment.likes.length || 0}</span>
+            <span class="likes-count">${comment.likes && Array.isArray(comment.likes) ? comment.likes.length : 0}</span>
           </div>
         </div>
       `;
       commentsList.appendChild(commentDiv);
     });
 
+    setupLikeEvents();
+  }
+
+  function setupLikeEvents() {
+    document.querySelectorAll('.like-icon').forEach(icon => {
+      const newIcon = icon.cloneNode(true);
+      icon.parentNode.replaceChild(newIcon, icon);
+    });
+
     document.querySelectorAll('.like-icon').forEach(icon => {
       icon.addEventListener('click', async (e) => {
         const commentId = e.target.dataset.commentId;
+        console.log(`Intentando dar/quitar like al comentario ${commentId} por el usuario ${currentUser._id}`);
         try {
           const response = await fetch(`http://localhost:3003/api/comments/${commentId}/like`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId: currentUser._id })
           });
-          if (!response.ok) throw new Error('Error al manejar el like');
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error al manejar el like: ${errorText}`);
+          }
           const updatedComment = await response.json();
+          console.log('Comentario actualizado después del like:', updatedComment);
           if (userLikes.has(commentId)) {
             userLikes.delete(commentId);
             e.target.src = '/mapa/app/assets/corazon.png';
@@ -258,8 +263,12 @@ function initializeMap(places) {
             e.target.src = '/mapa/app/assets/corazon (1).png';
           }
           e.target.nextElementSibling.textContent = updatedComment.likes.length;
+          selectedPlace.comments = selectedPlace.comments.map(comment => 
+            comment._id === commentId ? { ...comment, likes: updatedComment.likes } : comment
+          );
         } catch (error) {
           console.error('Error al manejar el like:', error);
+          alert('Error al manejar el like. Por favor, intenta de nuevo.');
         }
       });
     });
@@ -274,16 +283,16 @@ function initializeMap(places) {
 
     if (addCommentSection.classList.contains('hidden')) {
       addCommentSection.classList.remove('hidden');
-      commentsTitle.classList.add('hidden'); // Mantener el título oculto
+      commentsTitle.classList.add('hidden');
       commentsList.classList.add('hidden');
       toggleArrow.src = '/mapa/app/assets/arrow-up.png';
-      locationImage.classList.add('hidden'); // Mantener la imagen oculta
+      locationImage.classList.add('hidden');
     } else {
       addCommentSection.classList.add('hidden');
-      commentsTitle.classList.add('hidden'); // Mantener el título oculto al cerrar la bandeja
+      commentsTitle.classList.add('hidden');
       commentsList.classList.remove('hidden');
       toggleArrow.src = '/mapa/app/assets/down-arrow.png';
-      locationImage.classList.add('hidden'); // Mantener la imagen oculta al cerrar la bandeja
+      locationImage.classList.add('hidden');
     }
   });
 
@@ -302,6 +311,7 @@ function initializeMap(places) {
     if (commentText.trim() && selectedPlace && selectedRating > 0) {
       if (!currentUser._id) {
         alert('Por favor, inicia sesión para agregar un comentario.');
+        window.location.href = '/frontend/auth/login.html';
         return;
       }
       try {
@@ -309,8 +319,9 @@ function initializeMap(places) {
           text: commentText,
           userId: currentUser._id,
           placeId: selectedPlace._id,
-          rating: selectedRating
+          rating: parseInt(selectedRating)
         };
+        console.log('Enviando comentario:', newComment);
 
         const response = await fetch('http://localhost:3003/api/comments', {
           method: 'POST',
@@ -318,25 +329,28 @@ function initializeMap(places) {
           body: JSON.stringify(newComment)
         });
 
-        if (response.ok) {
-          const savedComment = await response.json();
-          savedComment.user = {
-            firstName: currentUser.firstName,
-            lastName: currentUser.lastName,
-            avatar: currentUser.avatar
-          };
-          selectedPlace.comments.push(savedComment);
-          document.getElementById('comment-input').value = '';
-          selectedRating = 0;
-          document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
-          displayComments(selectedPlace.comments);
-          document.getElementById('add-comment-section').classList.add('hidden');
-          document.getElementById('toggle-comments').src = '/mapa/app/assets/down-arrow.png';
-        } else {
-          alert('Error al guardar el comentario');
+        if (!response.ok) {
+          const errorText = await response.text();
+          throw new Error(`Error al guardar el comentario: ${errorText}`);
         }
+
+        const savedComment = await response.json();
+        console.log('Comentario guardado:', savedComment);
+        savedComment.user = {
+          firstName: currentUser.firstName,
+          lastName: currentUser.lastName,
+          avatar: currentUser.avatar
+        };
+        selectedPlace.comments.push(savedComment);
+        document.getElementById('comment-input').value = '';
+        selectedRating = 0;
+        document.querySelectorAll('.star').forEach(s => s.classList.remove('selected'));
+        displayComments(selectedPlace.comments);
+        document.getElementById('add-comment-section').classList.add('hidden');
+        document.getElementById('toggle-comments').src = '/mapa/app/assets/down-arrow.png';
       } catch (error) {
         console.error('Error al enviar el comentario:', error);
+        alert('Error al enviar el comentario. Por favor, intenta de nuevo.');
       }
     } else {
       alert('Por favor, escribe un comentario y selecciona una calificación.');
@@ -354,5 +368,7 @@ function initializeMap(places) {
 }
 
 fetchCurrentUser().then(() => {
-  fetchPlacesAndComments();
+  if (currentUser) {
+    fetchPlacesAndComments();
+  }
 });
