@@ -1,0 +1,24 @@
+{
+  "restaurants": [
+    {
+      "id": 1,
+      "name": "Quesadillas 'El Güero'",
+      "lat": 16.75,
+      "lng": -93.1167,
+      "address": "Maldonado 2, 29080 Tuxtla Gutiérrez, Chis.",
+      "comments": [
+        {"user": "Usuario1", "text": "¡Deliciosas quesadillas!", "rating": 5}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Tacos 'La Esquina'",
+      "lat": 16.76,
+      "lng": -93.115,
+      "address": "Maidana N° 2.2080, Turdera, Cba.",
+      "comments": [
+        {"user": "Usuario2", "text": "Los mejores tacos de la ciudad", "rating": 4}
+      ]
+    }
+  ]
+}

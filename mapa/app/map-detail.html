@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Búsqueda - SocialSpot</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
+  <link rel="stylesheet" href="../css/map.css">
+</head>
+<body>
+  <!-- Encabezado -->
+  <header class="header">
+    <img src="./assets/back.png" alt="Retroceder" class="back-icon">
+    <h1>Búsqueda</h1>
+    <img src="/mapa/app/assets/Social_LogoV1.png" alt="SocialSpot" class="logo">
+  </header>
+
+  <!-- Contenedor principal -->
+  <div class="main-container">
+    <!-- Mapa -->
+    <div id="map"></div>
+
+    <!-- Detalles y comentarios -->
+    <div class="details-container">
+      <div id="location-info" class="location-info hidden">
+        <h2 id="location-name">Selecciona un lugar</h2>
+        <img id="location-image" src="" alt="Imagen del lugar" class="location-image hidden">
+        <p id="location-address">Dirección: Cargando...</p>
+        <img src="/mapa/app/assets/share-icon.png" alt="Compartir" class="share-icon" onclick="shareLocation()">
+      </div>
+      <div id="comments-section" class="comments-section hidden">
+        <h3 id="comments-title">Comentarios</h3>
+        <div id="comments-list" class="comments-list"></div>
+        <img src="/mapa/app/assets/down-arrow.png" alt="Mostrar/Ocultar" id="toggle-comments" class="toggle-arrow">
+        <div id="add-comment-section" class="add-comment hidden">
+          <textarea id="comment-input" placeholder="Escribe tu comentario..."></textarea>
+          <div class="rating">
+            <span class="star" data-value="1">★</span>
+            <span class="star" data-value="2">★</span>
+            <span class="star" data-value="3">★</span>
+            <span class="star" data-value="4">★</span>
+            <span class="star" data-value="5">★</span>
+          </div>
+          <button id="submit-comment">Enviar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navegación inferior -->
+  <nav class="nav-bar">
+    <img src="/mapa/app/assets/home.png" alt="Inicio" class="nav-icon">
+    <img src="/mapa/app/assets/user (1).png" alt="Perfil" class="nav-icon">
+  </nav>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script src="../data/map.js"></script>
+</body>
+</html>

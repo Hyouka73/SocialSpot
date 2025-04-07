@@ -6,7 +6,7 @@ const commentSchema = new mongoose.Schema({
   rating: { type: Number, required: true },
   text: { type: String, required: true },
   date: { type: Date, default: Date.now },
-  likes: { type: Number, default: 0 }, // Para los "Me gusta" en la pantalla de búsqueda
+  likes: [{ type: String }], // Cambiado de Number a Array de userIds
 });
 
 module.exports = mongoose.model('Comment', commentSchema);

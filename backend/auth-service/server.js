@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const userRoutes = require('./routes/users'); // Importar la nueva ruta
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
@@ -20,6 +21,7 @@ app.use(express.json()); // Parsear JSON
 
 // Rutas
 app.use('/api/auth', authRoutes);
+app.use('/api/users', userRoutes); // Registrar la nueva ruta
 
 // Iniciar el servidor
 const PORT = process.env.PORT || 3001;

@@ -30,18 +30,32 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Dar "Me gusta" a un comentario
-router.put('/like/:commentId', async (req, res) => {
+// Alternar "like" o "unlike" en un comentario
+router.post('/:commentId/like', async (req, res) => {
   try {
+    const { userId } = req.body;
     const comment = await Comment.findById(req.params.commentId);
-    if (!comment) return res.status(404).json({ msg: 'Comentario no encontrado' });
 
-    comment.likes += 1;
+    if (!comment) {
+      return res.status(404).json({ message: 'Comentario no encontrado' });
+    }
+
+    // Verificar si el usuario ya dio "like"
+    const userIndex = comment.likes.indexOf(userId);
+    if (userIndex === -1) {
+      // Agregar "like"
+      comment.likes.push(userId);
+    } else {
+      // Quitar "like"
+      comment.likes.splice(userIndex, 1);
+    }
+
     await comment.save();
-    res.json(comment);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.json({ likes: comment.likes });
+  } catch (error) {
+    console.error('Error al manejar el like:', error);
+    res.status(500).json({ message: 'Error interno del servidor' });
   }
-});
+}); 
 
 module.exports = router;
