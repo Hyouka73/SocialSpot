@@ -1,0 +1,230 @@
+/* Importar fuentes de Google */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
+
+:root {
+    --primary-blue: #2196f3; /* Un azul similar al de la interfaz de ejemplo */
+    --light-blue-bg: #e3f2fd; /* Un azul muy claro para fondos sutiles (opcional) */
+    --text-dark: #212121; /* Gris oscuro para el texto principal */
+    --text-medium: #757575; /* Gris medio para texto secundario */
+    --border-light: #e0e0e0; /* Gris claro para bordes */
+    --background-light: #fafafa; /* Gris muy claro para el fondo general */
+    --white: #fff;
+    --shadow-light: rgba(0, 0, 0, 0.05);
+    --accent-yellow: #ffeb3b; /* Manteniendo el amarillo para el nivel si te gusta */
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    margin: 0;
+    padding: 0;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.profile-container {
+    background-color: var(--white);
+    border-radius: 10px;
+    box-shadow: 0 0 15px var(--shadow-light);
+    margin: 20px;
+    padding-bottom: 60px; /* Ajustar el padding inferior para evitar que el contenido se oculte tras el bottom-nav */
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 40px);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 20px;
+    background-color: var(--primary-blue); /* Fondo azul */
+    color: var(--white); /* Texto blanco */
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+header .back-btn,
+header .settings-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: var(--white); /* Iconos blancos */
+    cursor: pointer;
+    padding: 8px;
+}
+
+header h1 {
+    font-size: 1.5em;
+    color: var(--white); /* Nombre blanco */
+    margin: 0;
+    font-weight: 500;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 25px;
+    padding-top: 20px;
+}
+
+#profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px var(--shadow-light);
+}
+
+#description {
+    color: var(--text-medium);
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 0.9em;
+}
+
+#user-level {
+    color: var(--accent-yellow); /* Manteniendo el amarillo para el nivel */
+    font-weight: bold;
+    font-size: 1em;
+}
+
+.section {
+    margin-bottom: 25px;
+    padding: 0 20px;
+}
+
+.section h2 {
+    font-size: 1.2em;
+    color: var(--text-dark);
+    margin-top: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 8px;
+    font-weight: 500;
+}
+
+.card-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.card-scroll::-webkit-scrollbar {
+    height: 5px;
+    background-color: var(--background-light);
+    border-radius: 5px;
+}
+
+.card-scroll::-webkit-scrollbar-thumb {
+    background-color: #ced4da;
+    border-radius: 5px;
+}
+
+.card-scroll > div {
+    background-color: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 10px 15px;
+    margin-right: 10px;
+    flex-shrink: 0;
+    width: auto;
+    border: 1px solid var(--border-light);
+}
+
+.avatar-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.avatar-scroll::-webkit-scrollbar {
+    height: 5px;
+    background-color: var(--background-light);
+    border-radius: 5px;
+}
+
+.avatar-scroll::-webkit-scrollbar-thumb {
+    background-color: #ced4da;
+    border-radius: 5px;
+}
+
+.avatar-scroll > img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px var(--shadow-light);
+    border: 1px solid var(--border-light);
+}
+
+.bottom-nav {
+    background-color: var(--primary-blue); /* Fondo azul */
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-around;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.bottom-nav .nav-btn {
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    color: var(--white); /* Iconos blancos */
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+.bottom-nav .nav-btn.active {
+    color: var(--accent-yellow); /* Amarillo para el botón activo (puedes cambiarlo a blanco si prefieres) */
+}
+
+/* Media Query para pantallas más pequeñas (ejemplo: hasta 600px de ancho) */
+@media (max-width: 600px) {
+    .profile-container {
+        margin: 10px;
+        padding-bottom: 55px; /* Ajustar padding inferior en pantallas pequeñas */
+        border-radius: 8px;
+    }
+
+    header {
+        padding: 10px 15px;
+    }
+
+    header h1 {
+        font-size: 1.3em;
+    }
+
+    .user-info #profile-img {
+        width: 80px;
+        height: 80px;
+        margin-bottom: 10px;
+        padding-top: 15px;
+    }
+
+    .section {
+        padding: 0 15px;
+    }
+
+    .section h2 {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+    }
+
+    .bottom-nav .nav-btn {
+        font-size: 1.3em;
+        padding: 6px 10px;
+    }
+}

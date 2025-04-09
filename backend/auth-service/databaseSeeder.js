@@ -2,8 +2,8 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/user');
-const Place = require('./models/place');
-const Comment = require('./models/comment');
+const Place = require('./models/places');
+const Comment = require('./models/comments');
 
 const connectDB = async () => {
   try {
@@ -33,19 +33,19 @@ const seedDB = async () => {
   try {
     conn = await connectDB();
     
-    console.log('🔄 Creando colecciones si no existen...');
-    await Promise.all([
-      User.createCollection(),
-      Place.createCollection(),
-      Comment.createCollection()
-    ]);
+    // console.log('🔄 Creando colecciones si no existen...');
+    // await Promise.all([
+    //   User.createCollection(),
+    //   Place.createCollection(),
+    //   Comment.createCollection()
+    // ]);
 
-    console.log('🧹 Limpiando datos existentes...');
-    await Promise.all([
-      User.deleteMany({}),
-      Place.deleteMany({}),
-      Comment.deleteMany({})
-    ]);
+    // console.log('🧹 Limpiando datos existentes...');
+    // await Promise.all([
+    //   User.deleteMany({}),
+    //   Place.deleteMany({}),
+    //   Comment.deleteMany({})
+    // ]);
 
     console.log('🌱 Insertando usuarios...');
     const usersData = [
