@@ -1,0 +1,144 @@
+.friends-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    min-height: 100vh;
+    background-color: #f8f9fa;
+}
+
+.friends-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.back-button {
+    font-size: 1.5rem;
+    color: #333;
+    text-decoration: none;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+}
+
+.back-button:hover {
+    color: #007bff;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    background: #ffffff;
+    padding: 12px 20px;
+    border-radius: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    border: 1px solid #e0e0e0;
+}
+
+.search-bar i {
+    color: #666;
+    margin-right: 12px;
+}
+
+.search-bar input {
+    border: none;
+    background: none;
+    width: 100%;
+    outline: none;
+    font-size: 1rem;
+    color: #333;
+}
+
+.search-bar input::placeholder {
+    color: #999;
+}
+
+.friends-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    padding: 10px;
+}
+
+.friend-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.08);
+    display: flex;
+    align-items: center;
+    transition: all 0.3s ease;
+    border: 1px solid #eaeaea;
+}
+
+.friend-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.friend-avatar {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 15px;
+    border: 3px solid #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.friend-info {
+    flex: 1;
+}
+
+.friend-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0 0 5px 0;
+    color: #2c3e50;
+}
+
+.friend-email {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+}
+
+.no-friends {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    padding: 30px;
+    grid-column: 1 / -1;
+}
+
+.error {
+    color: #dc3545;
+    text-align: center;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    margin: 20px 0;
+    grid-column: 1 / -1;
+}
+
+@media (max-width: 600px) {
+    .friends-container {
+        padding: 15px;
+    }
+
+    .friends-list {
+        grid-template-columns: 1fr;
+    }
+
+    .friend-card {
+        padding: 15px;
+    }
+
+    .friend-avatar {
+        width: 50px;
+        height: 50px;
+    }
+}
