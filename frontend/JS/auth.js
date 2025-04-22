@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = document.getElementById('login-password').value;
 
             try {
-                const response = await fetch(`${API_USER_URL}login`, {
+                const response = await fetch(`${API_USER_URL}auth/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
 
             try {
-                const response = await fetch(`${API_USER_URL}register`, {
+                const response = await fetch(`${API_USER_URL}auth/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

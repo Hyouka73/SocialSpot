@@ -1,3 +1,5 @@
+import { API_USER_URL,API_COMMENTS_URL,API_PLACES_URL } from '../../frontend/config';
+
 let userLikes = new Set();
 let currentUser = null;
 
@@ -7,7 +9,7 @@ async function fetchCurrentUser() {
     if (!userId) {
       throw new Error('No se encontró un usuario autenticado en localStorage');
     }
-    const response = await fetch(`http://localhost:3001/api/users/${userId}`);
+    const response = await fetch(`${API_USER_URL}users/${userId}`);
     if (!response.ok) throw new Error('Error al obtener el usuario autenticado');
     currentUser = await response.json();
     if (currentUser.avatar) {
@@ -26,7 +28,7 @@ async function fetchCurrentUser() {
 
 async function fetchPlacesAndComments() {
   try {
-    const placesResponse = await fetch('http://localhost:3002/api/places');
+    const placesResponse = await fetch(`${API_PLACES_URL}`);
     if (!placesResponse.ok) throw new Error(`Error en /api/places: ${placesResponse.statusText}`);
     let places = await placesResponse.json();
     console.log('Lugares obtenidos:', places);
@@ -51,7 +53,7 @@ async function fetchPlacesAndComments() {
     const placesWithComments = await Promise.all(
       places.map(async (place) => {
         try {
-          const commentsResponse = await fetch(`http://localhost:3003/api/comments?placeId=${place._id}`);
+          const commentsResponse = await fetch(`${API_COMMENTS_URL}?placeId=${place._id}`);
           if (!commentsResponse.ok) throw new Error(`Error en /api/comments para ${place._id}: ${commentsResponse.statusText}`);
           let comments = await commentsResponse.json();
           console.log(`Comentarios para ${place.name} (placeId: ${place._id}):`, comments);
@@ -66,7 +68,7 @@ async function fetchPlacesAndComments() {
                     user: { firstName: 'Usuario', lastName: 'Desconocido', avatar: '/frontend/assets/images/user-placeholder.png' }
                   };
                 }
-                const userResponse = await fetch(`http://localhost:3001/api/users/${comment.userId}`);
+                const userResponse = await fetch(`${API_USER_URL}users/${comment.userId}`);
                 if (!userResponse.ok) {
                   throw new Error(`Error al obtener el usuario: ${userResponse.statusText}`);
                 }
@@ -244,7 +246,7 @@ function initializeMap(places) {
         const commentId = e.target.dataset.commentId;
         console.log(`Intentando dar/quitar like al comentario ${commentId} por el usuario ${currentUser._id}`);
         try {
-          const response = await fetch(`http://localhost:3003/api/comments/${commentId}/like`, {
+          const response = await fetch(`${API_COMMENTS_URL}/${commentId}/like`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ userId: currentUser._id })
@@ -323,7 +325,7 @@ function initializeMap(places) {
         };
         console.log('Enviando comentario:', newComment);
 
-        const response = await fetch('http://localhost:3003/api/comments', {
+        const response = await fetch(`${API_COMMENTS_URL}`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(newComment)
