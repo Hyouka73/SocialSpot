@@ -1,19 +1,20 @@
 /* ======== ESTILO BASE (para pantallas grandes como ordenador) ======== */
 
 body {
-    background: #f0f6fc;
+    background: #fff;
     font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
   }
   
   .profile-container {
-    max-width: 750px;
-    margin: 30px auto;
-    background-color: #ffffff;
-    border-radius: 25px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    max-width: 750px; /* Mantenemos el ancho máximo para simular la pantalla del celular */
+    margin: 30px auto; /* Centramos el contenedor horizontalmente */
+    background-color: #f0f6fc; /* Un fondo similar al de la otra página */
+    border-radius: 25px; /* Añadimos bordes redondeados al contenedor */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Añadimos una sombra suave */
     overflow: hidden;
+    position: relative; /* Añadimos esto para que sea el contenedor de referencia */
   }
   
   /* MODIFICACIÓN DEL HEADER */
@@ -21,9 +22,9 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #e0f7fa; /* Azul claro similar a la otra pestaña */
-    color: #000; /* Texto negro para contraste */
-    padding: 12px 15px; /* Reduzco un poco el padding */
+    background-color: #e0f7fa; /* Mantenemos el azul claro del header */
+    color: #000;
+    padding: 12px 15px;
   }
   
   header .back-btn {
@@ -31,7 +32,7 @@ body {
     border: none;
     font-size: 24px;
     cursor: pointer;
-    color: #0277bd; /* Azul más oscuro para el botón */
+    color: #0277bd;
     padding: 0;
     margin-right: 10px;
   }
@@ -39,9 +40,9 @@ body {
   header h1 {
     flex: 1;
     text-align: center;
-    font-size: 20px; /* Reduzco un poco el tamaño del texto */
+    font-size: 20px;
     margin: 0;
-    color: #0277bd; /* Azul más oscuro para el título */
+    color: #0277bd;
   }
   
   header .settings-btn {
@@ -52,8 +53,8 @@ body {
   }
   
   header .settings-btn svg {
-    fill: #0277bd; /* Aseguro que el icono SVG también sea del azul oscuro */
-    width: 28px; /* Mantengo el tamaño del SVG */
+    fill: #0277bd;
+    width: 28px;
     height: 28px;
   }
   
@@ -77,8 +78,8 @@ body {
   }
   
   .section {
-    padding: 25px;
-    border-top: 1px solid #e0e0e0;
+    padding: 25px; /* Restauramos el padding original */
+    border-top: 1px solid #e0e0e0; /* Restauramos el separador de secciones */
   }
   
   .section h2 {
@@ -94,22 +95,71 @@ body {
     overflow-x: auto;
   }
   
-  /* MODIFICACIÓN DEL MENÚ INFERIOR FIJO */
-  .bottom-nav {
-    position: fixed;
-    bottom: 0; /* Lo pego al borde inferior */
-    left: 0; /* Se extiende desde el borde izquierdo */
-    transform: none; /* Elimino la transformación horizontal */
-    background-color: #e0f7fa; /* Mismo azul claro que el header */
+  /* Estilos para la sección de Amigos */
+  #friends {
+    max-height: 200px; /* Establece una altura máxima para la sección */
+    overflow-y: auto; /* Añade una barra de desplazamiento vertical cuando el contenido excede la altura */
+    padding: 15px 25px; /* Mantenemos el padding */
+    border-top: 1px solid #e0e0e0; /* Mantenemos el separador */
+  }
+  
+  #friends h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .avatar-scroll {
     display: flex;
-    justify-content: space-around; /* Distribuyo los botones equitativamente */
+    gap: 12px;
+    overflow-x: auto; /* Mantenemos el scroll horizontal para los avatares si son muchos en una fila */
+  }
+  
+  /* Estilos para pantallas más grandes que móviles (ancho mínimo de 601px) */
+  @media screen and (min-width: 601px) {
+    #friends {
+      max-height: 250px; /* Aumentamos un poco la altura máxima en escritorio si es necesario */
+    }
+  
+    .avatar-scroll {
+      display: flex;
+      flex-wrap: wrap; /* Permitimos que los avatares pasen a la siguiente línea en escritorio */
+      gap: 15px;
+      flex-direction: row;
+      align-items: center;
+      overflow-x: auto; /* Mantenemos el scroll horizontal por si no caben en el ancho limitado */
+      max-height: 180px; /* Altura máxima para la fila de avatares antes de que el contenedor principal haga scroll */
+      overflow-y: auto; /* Añadimos scroll vertical si hay muchas filas de amigos */
+    }
+  
+    .avatar-scroll > div {
+      width: auto;
+    }
+  
+    .avatar-scroll img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  
+  /* MODIFICACIÓN DEL MENÚ INFERIOR FIJO PARA BOTONES NEGROS */
+  .bottom-nav {
+    position: absolute; /* Cambiamos a absolute para posicionarlo dentro del contenedor */
+    bottom: 0; /* Lo pegamos a la parte inferior de su contenedor */
+    left: 0;
+    transform: none;
+    background-color: #fff; /* Fondo blanco */
+    display: flex;
+    justify-content: space-around;
     align-items: center;
-    padding: 10px 0; /* Reduzco el padding vertical y ajusto el horizontal */
-    border-radius: 0; /* Elimino los bordes redondeados inferiores */
-    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1); /* Suavizo la sombra */
+    padding: 10px 0;
+    border-radius: 0;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
     z-index: 1000;
     transition: all 0.3s ease;
-    width: 100%; /* Se extiende a todo el ancho */
+    width: 100%;
   }
   
   /* Botones de navegación */
@@ -117,15 +167,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    color: #0277bd; /* Azul más oscuro para los iconos y texto */
+    color: #333; /* Iconos y texto en negro */
     font-size: 14px;
     text-decoration: none;
   }
   
   .nav-btn svg {
-    width: 34px; /* Mantengo el tamaño de los SVG */
+    width: 34px;
     height: 34px;
-    fill: #0277bd; /* Aseguro que los iconos SVG sean del azul oscuro */
+    fill: #333; /* Iconos SVG en negro */
     opacity: 0.6;
     margin-bottom: 4px;
     transition: opacity 0.2s ease;
@@ -136,115 +186,50 @@ body {
     opacity: 1;
   }
   
-  /* Elimino los estilos adaptados redundantes del menú inferior */
-  /* ======== MENÚ INFERIOR ADAPTADO ======== */
-  /*
-  .bottom-nav {
-    position: fixed;
-    bottom: -9px; 
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #007bff;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    padding: 12px 267px;
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    z-index: 1000;
-  }
+  /* ======== MEDIA QUERY: RESPONSIVE PARA MÓVIL ======== */
   
-  .nav-btn {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    font-size: 14px;
-  }
-  
-  .nav-btn img {
-    width: 34px;
-    height: 34px;
-    opacity: 0.6;
-    transition: opacity 0.2s ease;
-  }
-  
-  .nav-btn.active img,
-  .nav-btn:hover img {
-    opacity: 1;
-  }
-  
-  /* RESPONSIVE: para pantallas pequeñas */
-  /*
   @media screen and (max-width: 600px) {
-    .bottom-nav {
-      left: 0;
-      right: 0;
-      transform: none;
-      bottom: 0;
-      width: 100%;
-      border-radius: 0;
-      gap: 0;
-      justify-content: space-around;
-      padding: 10px 0;
+    #friends {
+      max-height: 150px; /* Ajustamos la altura máxima para móvil */
     }
   
-    .nav-btn img {
+    .avatar-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      align-items: center;
+    }
+  
+    .avatar-scroll img {
+      width: 40px; /* Ajustamos el tamaño del avatar en móvil */
+      height: 40px;
+    }
+  
+    .bottom-nav {
+      position: fixed; /* Volvemos a fixed para la vista móvil */
+      bottom: 0;
+      left: 0;
+      transform: none;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      border-radius: 0;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+  
+    .nav-btn svg {
       width: 26px;
       height: 26px;
+      fill: #333;
     }
   
     .nav-btn {
       font-size: 12px;
-    }
-  }
-  */
-  
-  /* ======== MEDIA QUERY: RESPONSIVE PARA MÓVIL ======== */
-  
-  @media screen and (max-width: 600px) {
-    .profile-container {
-      border-radius: 0;
-      margin: 0;
-    }
-  
-    header {
-      padding: 12px 15px;
-    }
-  
-    header h1 {
-      font-size: 18px;
-    }
-  
-    .user-info {
-      padding: 20px 10px;
-    }
-  
-    #profile-img {
-      width: 90px;
-      height: 90px;
-    }
-  
-    .section {
-      padding: 18px;
-    }
-  
-    .section h2 {
-      font-size: 16px;
-    }
-  
-    .bottom-nav {
-      height: auto; /* Ajusta la altura automáticamente */
-      padding: 10px 0; /* Ajusta el padding para móviles */
-    }
-  
-    .nav-btn svg {
-      width: 26px; /* Ajusta el tamaño de los iconos SVG en móviles */
-      height: 26px;
-    }
-  
-    .nav-btn {
-      font-size: 12px; /* Ajusta el tamaño del texto en móviles */
+      color: #333;
     }
   }
