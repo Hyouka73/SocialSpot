@@ -1,230 +1,250 @@
-/* Importar fuentes de Google */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
-
-:root {
-    --primary-blue: #2196f3; /* Un azul similar al de la interfaz de ejemplo */
-    --light-blue-bg: #e3f2fd; /* Un azul muy claro para fondos sutiles (opcional) */
-    --text-dark: #212121; /* Gris oscuro para el texto principal */
-    --text-medium: #757575; /* Gris medio para texto secundario */
-    --border-light: #e0e0e0; /* Gris claro para bordes */
-    --background-light: #fafafa; /* Gris muy claro para el fondo general */
-    --white: #fff;
-    --shadow-light: rgba(0, 0, 0, 0.05);
-    --accent-yellow: #ffeb3b; /* Manteniendo el amarillo para el nivel si te gusta */
-}
+/* ======== ESTILO BASE (para pantallas grandes como ordenador) ======== */
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--background-light);
-    color: var(--text-dark);
+    background: #f0f6fc;
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.profile-container {
-    background-color: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 0 15px var(--shadow-light);
-    margin: 20px;
-    padding-bottom: 60px; /* Ajustar el padding inferior para evitar que el contenido se oculte tras el bottom-nav */
-    display: flex;
-    flex-direction: column;
-    min-height: calc(100vh - 40px);
-}
-
-header {
+  }
+  
+  .profile-container {
+    max-width: 750px;
+    margin: 30px auto;
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+  
+  /* MODIFICACIÓN DEL HEADER */
+  header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    background-color: var(--primary-blue); /* Fondo azul */
-    color: var(--white); /* Texto blanco */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-header .back-btn,
-header .settings-btn {
+    background-color: #e0f7fa; /* Azul claro similar a la otra pestaña */
+    color: #000; /* Texto negro para contraste */
+    padding: 12px 15px; /* Reduzco un poco el padding */
+  }
+  
+  header .back-btn {
     background: none;
     border: none;
-    font-size: 1.5em;
-    color: var(--white); /* Iconos blancos */
+    font-size: 24px;
     cursor: pointer;
-    padding: 8px;
-}
-
-header h1 {
-    font-size: 1.5em;
-    color: var(--white); /* Nombre blanco */
+    color: #0277bd; /* Azul más oscuro para el botón */
+    padding: 0;
+    margin-right: 10px;
+  }
+  
+  header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 20px; /* Reduzco un poco el tamaño del texto */
     margin: 0;
-    font-weight: 500;
-}
-
-.user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-top: 20px;
-}
-
-#profile-img {
+    color: #0277bd; /* Azul más oscuro para el título */
+  }
+  
+  header .settings-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  header .settings-btn svg {
+    fill: #0277bd; /* Aseguro que el icono SVG también sea del azul oscuro */
+    width: 28px; /* Mantengo el tamaño del SVG */
+    height: 28px;
+  }
+  
+  .user-info {
+    text-align: center;
+    padding: 30px 20px;
+  }
+  
+  #profile-img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px var(--shadow-light);
-}
-
-#description {
-    color: var(--text-medium);
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-}
-
-#user-level {
-    color: var(--accent-yellow); /* Manteniendo el amarillo para el nivel */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .level {
+    color: #fbc02d;
     font-weight: bold;
-    font-size: 1em;
-}
-
-.section {
-    margin-bottom: 25px;
-    padding: 0 20px;
-}
-
-.section h2 {
-    font-size: 1.2em;
-    color: var(--text-dark);
-    margin-top: 0;
+    margin-top: 10px;
+  }
+  
+  .section {
+    padding: 25px;
+    border-top: 1px solid #e0e0e0;
+  }
+  
+  .section h2 {
+    font-size: 18px;
     margin-bottom: 15px;
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: 8px;
-    font-weight: 500;
-}
-
-.card-scroll {
+    color: #333;
+  }
+  
+  .card-scroll,
+  .avatar-scroll {
     display: flex;
+    gap: 12px;
     overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.card-scroll::-webkit-scrollbar {
-    height: 5px;
-    background-color: var(--background-light);
-    border-radius: 5px;
-}
-
-.card-scroll::-webkit-scrollbar-thumb {
-    background-color: #ced4da;
-    border-radius: 5px;
-}
-
-.card-scroll > div {
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: 10px 15px;
-    margin-right: 10px;
-    flex-shrink: 0;
-    width: auto;
-    border: 1px solid var(--border-light);
-}
-
-.avatar-scroll {
-    display: flex;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.avatar-scroll::-webkit-scrollbar {
-    height: 5px;
-    background-color: var(--background-light);
-    border-radius: 5px;
-}
-
-.avatar-scroll::-webkit-scrollbar-thumb {
-    background-color: #ced4da;
-    border-radius: 5px;
-}
-
-.avatar-scroll > img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    flex-shrink: 0;
-    box-shadow: 0 2px 4px var(--shadow-light);
-    border: 1px solid var(--border-light);
-}
-
-.bottom-nav {
-    background-color: var(--primary-blue); /* Fondo azul */
-    padding: 10px 0;
-    display: flex;
-    justify-content: space-around;
+  }
+  
+  /* MODIFICACIÓN DEL MENÚ INFERIOR FIJO */
+  .bottom-nav {
     position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.bottom-nav .nav-btn {
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    color: var(--white); /* Iconos blancos */
-    cursor: pointer;
-    padding: 8px 15px;
-}
-
-.bottom-nav .nav-btn.active {
-    color: var(--accent-yellow); /* Amarillo para el botón activo (puedes cambiarlo a blanco si prefieres) */
-}
-
-/* Media Query para pantallas más pequeñas (ejemplo: hasta 600px de ancho) */
-@media (max-width: 600px) {
+    bottom: 0; /* Lo pego al borde inferior */
+    left: 0; /* Se extiende desde el borde izquierdo */
+    transform: none; /* Elimino la transformación horizontal */
+    background-color: #e0f7fa; /* Mismo azul claro que el header */
+    display: flex;
+    justify-content: space-around; /* Distribuyo los botones equitativamente */
+    align-items: center;
+    padding: 10px 0; /* Reduzco el padding vertical y ajusto el horizontal */
+    border-radius: 0; /* Elimino los bordes redondeados inferiores */
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1); /* Suavizo la sombra */
+    z-index: 1000;
+    transition: all 0.3s ease;
+    width: 100%; /* Se extiende a todo el ancho */
+  }
+  
+  /* Botones de navegación */
+  .nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #0277bd; /* Azul más oscuro para los iconos y texto */
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .nav-btn svg {
+    width: 34px; /* Mantengo el tamaño de los SVG */
+    height: 34px;
+    fill: #0277bd; /* Aseguro que los iconos SVG sean del azul oscuro */
+    opacity: 0.6;
+    margin-bottom: 4px;
+    transition: opacity 0.2s ease;
+  }
+  
+  .nav-btn.active svg,
+  .nav-btn:hover svg {
+    opacity: 1;
+  }
+  
+  /* Elimino los estilos adaptados redundantes del menú inferior */
+  /* ======== MENÚ INFERIOR ADAPTADO ======== */
+  /*
+  .bottom-nav {
+    position: fixed;
+    bottom: -9px; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #007bff;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 12px 267px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    z-index: 1000;
+  }
+  
+  .nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+  }
+  
+  .nav-btn img {
+    width: 34px;
+    height: 34px;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+  
+  .nav-btn.active img,
+  .nav-btn:hover img {
+    opacity: 1;
+  }
+  
+  /* RESPONSIVE: para pantallas pequeñas */
+  /*
+  @media screen and (max-width: 600px) {
+    .bottom-nav {
+      left: 0;
+      right: 0;
+      transform: none;
+      bottom: 0;
+      width: 100%;
+      border-radius: 0;
+      gap: 0;
+      justify-content: space-around;
+      padding: 10px 0;
+    }
+  
+    .nav-btn img {
+      width: 26px;
+      height: 26px;
+    }
+  
+    .nav-btn {
+      font-size: 12px;
+    }
+  }
+  */
+  
+  /* ======== MEDIA QUERY: RESPONSIVE PARA MÓVIL ======== */
+  
+  @media screen and (max-width: 600px) {
     .profile-container {
-        margin: 10px;
-        padding-bottom: 55px; /* Ajustar padding inferior en pantallas pequeñas */
-        border-radius: 8px;
+      border-radius: 0;
+      margin: 0;
     }
-
+  
     header {
-        padding: 10px 15px;
+      padding: 12px 15px;
     }
-
+  
     header h1 {
-        font-size: 1.3em;
+      font-size: 18px;
     }
-
-    .user-info #profile-img {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 10px;
-        padding-top: 15px;
+  
+    .user-info {
+      padding: 20px 10px;
     }
-
+  
+    #profile-img {
+      width: 90px;
+      height: 90px;
+    }
+  
     .section {
-        padding: 0 15px;
+      padding: 18px;
     }
-
+  
     .section h2 {
-        font-size: 1.1em;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
+      font-size: 16px;
     }
-
-    .bottom-nav .nav-btn {
-        font-size: 1.3em;
-        padding: 6px 10px;
+  
+    .bottom-nav {
+      height: auto; /* Ajusta la altura automáticamente */
+      padding: 10px 0; /* Ajusta el padding para móviles */
     }
-}
+  
+    .nav-btn svg {
+      width: 26px; /* Ajusta el tamaño de los iconos SVG en móviles */
+      height: 26px;
+    }
+  
+    .nav-btn {
+      font-size: 12px; /* Ajusta el tamaño del texto en móviles */
+    }
+  }

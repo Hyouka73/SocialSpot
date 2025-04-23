@@ -3,8 +3,6 @@ import { API_USER_URL } from '../config.js';
 
 
 // Simular ID del usuario (idealmente viene del login o auth token)
-const userId = '67f45df94b6ccd2dbdc96a1f'; // Reemplazalo por uno real o usa localStorage.getItem('userId')
-
 async function cargarPerfil() {
   try {
     const response = await fetch(`${API_USER_URL}users/${userId}`);
