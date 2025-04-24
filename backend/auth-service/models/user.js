@@ -11,6 +11,8 @@ const userSchema = new mongoose.Schema({
   notifications: { type: Boolean, default: false },
   darkMode: { type: Boolean, default: false }, // Para modo oscuro
   reviewCount: { type: Number, default: 0 },
+  resetPasswordToken: {type: String, required: false},
+  resetPasswordExpires: {type: Date, required: false},
   preferences: {
     favoritePlaceTypes: [String], // Ejemplo: ["restaurantes", "parques"]
     priceRange: String,           // Ejemplo: "bajo", "medio", "alto"
@@ -40,6 +42,7 @@ const userSchema = new mongoose.Schema({
       addedAt: Date,
     },
   ],
+  
 });
 
 module.exports = mongoose.model('User', userSchema);

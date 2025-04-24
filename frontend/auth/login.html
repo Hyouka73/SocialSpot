@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SocialSpot - Auth</title>
+    <title>SocialSpot - Login</title>
     <link rel="stylesheet" href="../css/auth.css">
     <link rel="stylesheet" href="../css/dark-mode.css">
 </head>
 <body>
-    <div class="form-container" id="login-container">
+    <div class="form-container">
         <div class="progress-indicator">
             <div class="active-indicator"></div>
             <div class="inactive-indicator"></div>
@@ -16,7 +16,7 @@
         
         <div class="header-text">
             <h2>Inicio de sesión</h2>
-            <a id="front-btn" class="front-arrow">›</a>
+            <a href="register.html" class="front-arrow">›</a>
         </div>
         
         <div class="logo-container">
@@ -25,14 +25,18 @@
         </div>
         
         <form class="form" id="login-form">
-            <input type="email" class="input" placeholder="Correo Electronico" id="login-email" inputmode="email" required>
-            <input type="password" class="input" placeholder="Contraseña" id="login-password" autocomplete="current-password" required>
+            <input type="email" class="input" placeholder="Correo Electronico" id="login-email" required>
+            <input type="password" class="input" placeholder="Contraseña" id="login-password" required>
             
             <button type="submit" class="action-button">Iniciar sesión</button>
         </form>
         
+        <div class="forgot-password-link">
+            <a href="forgot-password.html">¿Olvidaste tu contraseña?</a>
+        </div>
+        
         <div class="register-link">
-            <a href="#" id="show-register-btn">Registrarse</a> <!-- Cambia href si es necesario -->
+            <a href="register.html">Registrarse</a>
         </div>
         
         <div class="social-login">
@@ -42,44 +46,7 @@
         </div>
     </div>
 
-    <div class="form-container" id="register-container" style="display: none;">
-        <div class="progress-indicator">
-            <div class="inactive-indicator"></div>
-            <div class="active-indicator"></div>
-        </div>
-        
-        <div class="header-text">
-            <a href="#" id="back-btn" class="back-arrow">‹</a>
-            <h2>Registro de usuario</h2>
-            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Mini Logo" class="mini-logo">
-        </div>
-        
-        <div class="register-title">
-            <h3>Crea Una Nueva Cuenta</h3>
-        </div>
-        
-        <form class="form" id="register-form">
-            <input type="text" class="input" placeholder="Nombre/s" id="register-name" required>
-            <input type="text" class="input" placeholder="Apellidos" id="register-lastname" required>
-            <input type="tel" class="input" placeholder="Numero Telefono" id="register-phone" required>
-            <input type="email" class="input" placeholder="Correo Electronico" id="register-email" required inputmode="email">
-            <input type="password" class="input" placeholder="Contraseña" id="register-password" required autocomplete="new-password">
-            <input type="password" class="input" placeholder="Confirmar contraseña" id="register-confirm-password" required autocomplete="new-password">
-            <select class="input" id="register-sexo" required>
-                <option value="" disabled selected>Selecciona tu sexo</option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Otro</option>
-            </select>
-            <button type="submit" class="action-button register-btn">Registrarse</button>
-        </form>
-        
-        <div class="login-link">
-            <p>Ya tienes una cuenta? <a href="#" id="show-login-btn">Inicia sesión</a></p>
-        </div>
-    </div>
-
-    <script src="../JS/auth.js" type="module"></script> <!-- Asegúrate de usar type="module" -->
-    <script src="../js/dark-mode.js"></script>
+    <script src="../JS/auth/login.js" type="module"></script>
+    <script src="../js/dark-mode.js" type="module"></script>
 </body>
 </html>

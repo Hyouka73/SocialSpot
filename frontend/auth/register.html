@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SocialSpot - Registro</title>
+    <link rel="stylesheet" href="../css/auth.css">
+    <link rel="stylesheet" href="../css/dark-mode.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="progress-indicator">
+            <div class="inactive-indicator"></div>
+            <div class="active-indicator"></div>
+        </div>
+        
+        <div class="header-text">
+            <a href="login.html" class="back-arrow">‹</a>
+            <h2>Registro de usuario</h2>
+            <img src="../assets/images/Social_LogoV1.png" alt="SocialSpot Mini Logo" class="mini-logo">
+        </div>
+        
+        <div class="register-title">
+            <h3>Crea Una Nueva Cuenta</h3>
+        </div>
+        
+        <form class="form" id="register-form">
+            <input type="text" class="input" placeholder="Nombre/s" id="register-name" required>
+            <input type="text" class="input" placeholder="Apellidos" id="register-lastname" required>
+            <input type="tel" class="input" placeholder="Numero Telefono" id="register-phone" required>
+            <input type="email" class="input" placeholder="Correo Electronico" id="register-email" required>
+            <input type="password" class="input" placeholder="Contraseña" id="register-password" required>
+            <input type="password" class="input" placeholder="Confirmar contraseña" id="register-confirm-password" required>
+            <select class="input" id="register-sexo" required>
+                <option value="" disabled selected>Selecciona tu sexo</option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Otro</option>
+            </select>
+            <button type="submit" class="action-button register-btn">Registrarse</button>
+        </form>
+        
+        <div class="login-link">
+            <p>Ya tienes una cuenta? <a href="login.html">Inicia sesión</a></p>
+        </div>
+    </div>
+
+    <script src="../JS/auth/register.js" type="module"></script>
+    <script src="../js/dark-mode.js" type="module"></script>
+</body>
+</html>
