@@ -116,7 +116,7 @@ function renderPlaces(places, containerId) {
         card.addEventListener('touchend', removeRippleEffect);
         card.addEventListener('click', () => {
             console.log(`Redirigiendo a map-detail.html con ID: ${place._id}`); // Depuración
-            window.location.href = `/mapa/app/map-detail.html?id=${place._id}`; // Pasar el ID del lugar
+            window.location.href = `/frontend/app/map-detail.html?id=${place._id}`; // Pasar el ID del lugar
         });
         
         container.appendChild(placeCard);
