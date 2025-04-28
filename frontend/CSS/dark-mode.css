@@ -1,55 +1,201 @@
 /* dark-mode.css */
 :root {
-    /* Colores para modo oscuro */
-    --dm-bg: #121212;
-    --dm-card: #1e1e1e;
-    --dm-text: #f8f9fa;
-    --dm-text-secondary: #adb5bd;
-    --dm-divider: #333;
-    --dm-primary: #4361ee;
-    --dm-hover: rgba(255, 255, 255, 0.05);
-  }
-  
-  body.dark-mode {
-    background-color: var(--dm-bg);
-    color: var(--dm-text);
-  }
-  
-  body.dark-mode .preferences-container,
-  body.dark-mode .settings-container,
-  body.dark-mode .legal-container {
-    background-color: var(--dm-card);
-  }
-  
-  body.dark-mode h1, 
-  body.dark-mode h2,
-  body.dark-mode h3,
-  body.dark-mode p {
-    color: var(--dm-text);
-  }
-  
-  body.dark-mode .preference-section,
-  body.dark-mode .term-card,
-  body.dark-mode .settings-section {
-    background-color: var(--dm-card);
-    border-color: var(--dm-divider);
-  }
-  
-  body.dark-mode .styled-select,
-  body.dark-mode input:not([type="checkbox"]),
-  body.dark-mode textarea {
-    background-color: var(--dm-card);
-    color: var(--dm-text);
-    border-color: var(--dm-divider);
-  }
-  
-  /* Componentes específicos (ej. switches) */
-  body.dark-mode .toggle-switch {
-    background-color: var(--dm-divider);
-  }
-  
-  body.dark-mode .toggle-switch .slider-toggle {
-    background-color: var(--dm-primary);
-  }
-  
-  /* Añade aquí todos los componentes que necesiten modo oscuro */
+  /* Colores base */
+  --dm-bg: #121212;
+  --dm-card: #1e1e1e;
+  --dm-text: #f8f9fa;
+  --dm-text-secondary: #adb5bd;
+  --dm-divider: #333;
+  --dm-primary: #4361ee;
+  --dm-hover: rgba(255, 255, 255, 0.05);
+  --dm-input-bg: #2d2d2d;
+  --dm-border: #444;
+  --dm-primary-hover: #5a7dee;
+  --dm-input-focus: rgba(67, 97, 238, 0.3);
+  --dm-section-border: #4361ee; /* Para los bordes de sección */
+}
+
+/* Contenedor principal */
+body.dark-mode .app-container {
+  background: linear-gradient(135deg, #1a1a1a 0%, #121212 100%);
+}
+
+/* Header */
+body.dark-mode .app-header {
+  background: rgba(30, 30, 30, 0.95);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+body.dark-mode .search-box {
+  background-color: var(--dm-input-bg);
+}
+
+body.dark-mode #search-input {
+  color: var(--dm-text);
+}
+
+body.dark-mode .search-icon,
+body.dark-mode .settings-button {
+  color: var(--dm-text-secondary);
+}
+
+/* Filtros */
+body.dark-mode .filters-container {
+  background: rgba(30, 30, 30, 0.85);
+  border-bottom-color: var(--dm-divider);
+}
+
+body.dark-mode .filter-pill {
+  background: rgba(45, 45, 45, 0.8);
+  color: var(--dm-text);
+  border-color: var(--dm-divider);
+}
+
+body.dark-mode .filter-pill:hover {
+  border-color: var(--dm-primary);
+}
+
+body.dark-mode .filter-pill.active {
+  background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+  box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+}
+
+/* Contenido principal */
+body.dark-mode .places-section h2 {
+  color: var(--dm-text);
+  border-bottom-color: var(--dm-primary);
+}
+
+/* Tarjetas de lugares */
+body.dark-mode .place-card {
+  background: rgba(30, 30, 30, 0.9);
+  border-color: rgba(67, 97, 238, 0.3);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+body.dark-mode .place-info {
+  background: rgba(30, 30, 30, 0.9);
+}
+
+body.dark-mode .place-name {
+  color: var(--dm-text);
+}
+
+/* Barra de navegación inferior */
+body.dark-mode .bottom-nav {
+  background: rgba(30, 30, 30, 0.95); /* Fondo original, oscuro */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .nav-item {
+  color: var(--dm-text-secondary); /* Iconos blancos por defecto */
+}
+
+body.dark-mode .nav-item.active {
+  color: var(--dm-primary); /* Iconos azules cuando están activos */
+}
+
+/* Ajustes para los textos de precio */
+body.dark-mode .price-indicator {
+  color: var(--dm-text);
+}
+
+/* Ajustes para las estrellas de rating */
+body.dark-mode .star {
+  color: #ffc107; /* Mantenemos el amarillo para las estrellas */
+}
+
+/* Ajustes para los separadores */
+body.dark-mode hr {
+  border-color: var(--dm-divider);
+}
+
+/* Spinner de carga */
+body.dark-mode .loading-spinner {
+  background-color: rgba(30, 30, 30, 0.8);
+}
+
+/* Perfil de usuario - Modo oscuro */
+body.dark-mode {
+  background-color: var(--dm-bg);
+  color: var(--dm-text);
+}
+
+body.dark-mode .profile-container {
+  background-color: var(--dm-card);
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode header {
+  background-color: var(--dm-primary);
+  color: var(--dm-text);
+}
+
+body.dark-mode .back-btn,
+body.dark-mode .settings-btn {
+  color: var(--dm-text);
+}
+
+body.dark-mode #username {
+  color: var(--dm-text);
+}
+
+body.dark-mode .user-info {
+  background-color: transparent;
+}
+
+body.dark-mode #profile-img {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border: 2px solid var(--dm-primary);
+}
+
+body.dark-mode #description {
+  color: var(--dm-text-secondary);
+}
+
+body.dark-mode #user-level {
+  color: #ffeb3b; /* Mantenemos el amarillo para el nivel */
+}
+
+body.dark-mode .section {
+  background-color: transparent;
+}
+
+body.dark-mode .section h2 {
+  color: var(--dm-text);
+  border-bottom-color: var(--dm-primary);
+}
+
+body.dark-mode .card-scroll > div {
+  background-color: var(--dm-input-bg);
+  color: var(--dm-text);
+  border-color: var(--dm-divider);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .avatar-scroll > img {
+  border-color: var(--dm-divider);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+body.dark-mode .card-scroll::-webkit-scrollbar,
+body.dark-mode .avatar-scroll::-webkit-scrollbar {
+  background-color: var(--dm-input-bg);
+}
+
+body.dark-mode .card-scroll::-webkit-scrollbar-thumb,
+body.dark-mode .avatar-scroll::-webkit-scrollbar-thumb {
+  background-color: var(--dm-divider);
+}
+
+body.dark-mode .bottom-nav {
+  background: rgba(30, 30, 30, 0.95); /* Aseguramos que la barra no sea azul */
+}
+
+body.dark-mode .nav-btn {
+  color: var(--dm-text);
+}
+
+body.dark-mode .nav-btn.active {
+  color: #ffeb3b; /* Amarillo para el botón activo */
+}

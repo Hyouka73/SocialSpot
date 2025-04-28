@@ -36,6 +36,7 @@ class DarkMode {
       localStorage.setItem('darkMode', 'disabled');
       if (this.toggle) this.toggle.checked = false;
     }
+    
   }
   
   // Inicializar al cargar
