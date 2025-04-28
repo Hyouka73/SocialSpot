@@ -268,7 +268,7 @@ function applyDarkMode(enabled) {
 // Función para cargar datos del usuario desde la API
 async function loadUserData(userId, token) {
     try {
-        const response = await fetch(`${API_USER_URL}profile/${userId}`, {
+        const response = await fetch(`${API_USER_URL}auth/profile/${userId}`, {
             method: 'GET',
             headers: {
                 'Authorization': `Bearer ${token}`,

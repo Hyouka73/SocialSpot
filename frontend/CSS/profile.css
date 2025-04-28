@@ -1,230 +1,235 @@
-/* Importar fuentes de Google */
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;500;700&display=swap');
-
-:root {
-    --primary-blue: #2196f3; /* Un azul similar al de la interfaz de ejemplo */
-    --light-blue-bg: #e3f2fd; /* Un azul muy claro para fondos sutiles (opcional) */
-    --text-dark: #212121; /* Gris oscuro para el texto principal */
-    --text-medium: #757575; /* Gris medio para texto secundario */
-    --border-light: #e0e0e0; /* Gris claro para bordes */
-    --background-light: #fafafa; /* Gris muy claro para el fondo general */
-    --white: #fff;
-    --shadow-light: rgba(0, 0, 0, 0.05);
-    --accent-yellow: #ffeb3b; /* Manteniendo el amarillo para el nivel si te gusta */
-}
+/* ======== ESTILO BASE (para pantallas grandes como ordenador) ======== */
 
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: var(--background-light);
-    color: var(--text-dark);
+    background: #fff;
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
     padding: 0;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
-.profile-container {
-    background-color: var(--white);
-    border-radius: 10px;
-    box-shadow: 0 0 15px var(--shadow-light);
-    margin: 20px;
-    padding-bottom: 60px; /* Ajustar el padding inferior para evitar que el contenido se oculte tras el bottom-nav */
-    display: flex;
-    flex-direction: column;
-    min-height: calc(100vh - 40px);
-}
-
-header {
+  }
+  
+  .profile-container {
+    max-width: 750px; /* Mantenemos el ancho máximo para simular la pantalla del celular */
+    margin: 30px auto; /* Centramos el contenedor horizontalmente */
+    background-color: #f0f6fc; /* Un fondo similar al de la otra página */
+    border-radius: 25px; /* Añadimos bordes redondeados al contenedor */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1); /* Añadimos una sombra suave */
+    overflow: hidden;
+    position: relative; /* Añadimos esto para que sea el contenedor de referencia */
+  }
+  
+  /* MODIFICACIÓN DEL HEADER */
+  header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 20px;
-    margin-bottom: 20px;
-    background-color: var(--primary-blue); /* Fondo azul */
-    color: var(--white); /* Texto blanco */
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-header .back-btn,
-header .settings-btn {
+    background-color: #e0f7fa; /* Mantenemos el azul claro del header */
+    color: #000;
+    padding: 12px 15px;
+  }
+  
+  header .back-btn {
     background: none;
     border: none;
-    font-size: 1.5em;
-    color: var(--white); /* Iconos blancos */
+    font-size: 24px;
     cursor: pointer;
-    padding: 8px;
-}
-
-header h1 {
-    font-size: 1.5em;
-    color: var(--white); /* Nombre blanco */
+    color: #0277bd;
+    padding: 0;
+    margin-right: 10px;
+  }
+  
+  header h1 {
+    flex: 1;
+    text-align: center;
+    font-size: 20px;
     margin: 0;
-    font-weight: 500;
-}
-
-.user-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 25px;
-    padding-top: 20px;
-}
-
-#profile-img {
+    color: #0277bd;
+  }
+  
+  header .settings-btn {
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+  
+  header .settings-btn svg {
+    fill: #0277bd;
+    width: 28px;
+    height: 28px;
+  }
+  
+  .user-info {
+    text-align: center;
+    padding: 30px 20px;
+  }
+  
+  #profile-img {
     width: 100px;
     height: 100px;
     border-radius: 50%;
     object-fit: cover;
-    margin-bottom: 15px;
-    box-shadow: 0 4px 8px var(--shadow-light);
-}
-
-#description {
-    color: var(--text-medium);
-    text-align: center;
-    margin-bottom: 10px;
-    font-size: 0.9em;
-}
-
-#user-level {
-    color: var(--accent-yellow); /* Manteniendo el amarillo para el nivel */
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.2);
+  }
+  
+  .level {
+    color: #fbc02d;
     font-weight: bold;
-    font-size: 1em;
-}
-
-.section {
-    margin-bottom: 25px;
-    padding: 0 20px;
-}
-
-.section h2 {
-    font-size: 1.2em;
-    color: var(--text-dark);
-    margin-top: 0;
+    margin-top: 10px;
+  }
+  
+  .section {
+    padding: 25px; /* Restauramos el padding original */
+    border-top: 1px solid #e0e0e0; /* Restauramos el separador de secciones */
+  }
+  
+  .section h2 {
+    font-size: 18px;
     margin-bottom: 15px;
-    border-bottom: 1px solid var(--border-light);
-    padding-bottom: 8px;
-    font-weight: 500;
-}
-
-.card-scroll {
+    color: #333;
+  }
+  
+  .card-scroll,
+  .avatar-scroll {
     display: flex;
+    gap: 12px;
     overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.card-scroll::-webkit-scrollbar {
-    height: 5px;
-    background-color: var(--background-light);
-    border-radius: 5px;
-}
-
-.card-scroll::-webkit-scrollbar-thumb {
-    background-color: #ced4da;
-    border-radius: 5px;
-}
-
-.card-scroll > div {
-    background-color: var(--white);
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-    padding: 10px 15px;
-    margin-right: 10px;
-    flex-shrink: 0;
-    width: auto;
-    border: 1px solid var(--border-light);
-}
-
-.avatar-scroll {
+  }
+  
+  /* Estilos para la sección de Amigos */
+  #friends {
+    max-height: 200px; /* Establece una altura máxima para la sección */
+    overflow-y: auto; /* Añade una barra de desplazamiento vertical cuando el contenido excede la altura */
+    padding: 15px 25px; /* Mantenemos el padding */
+    border-top: 1px solid #e0e0e0; /* Mantenemos el separador */
+  }
+  
+  #friends h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #333;
+  }
+  
+  .avatar-scroll {
     display: flex;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
-
-.avatar-scroll::-webkit-scrollbar {
-    height: 5px;
-    background-color: var(--background-light);
-    border-radius: 5px;
-}
-
-.avatar-scroll::-webkit-scrollbar-thumb {
-    background-color: #ced4da;
-    border-radius: 5px;
-}
-
-.avatar-scroll > img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 10px;
-    flex-shrink: 0;
-    box-shadow: 0 2px 4px var(--shadow-light);
-    border: 1px solid var(--border-light);
-}
-
-.bottom-nav {
-    background-color: var(--primary-blue); /* Fondo azul */
-    padding: 10px 0;
+    gap: 12px;
+    overflow-x: auto; /* Mantenemos el scroll horizontal para los avatares si son muchos en una fila */
+  }
+  
+  /* Estilos para pantallas más grandes que móviles (ancho mínimo de 601px) */
+  @media screen and (min-width: 601px) {
+    #friends {
+      max-height: 250px; /* Aumentamos un poco la altura máxima en escritorio si es necesario */
+    }
+  
+    .avatar-scroll {
+      display: flex;
+      flex-wrap: wrap; /* Permitimos que los avatares pasen a la siguiente línea en escritorio */
+      gap: 15px;
+      flex-direction: row;
+      align-items: center;
+      overflow-x: auto; /* Mantenemos el scroll horizontal por si no caben en el ancho limitado */
+      max-height: 180px; /* Altura máxima para la fila de avatares antes de que el contenedor principal haga scroll */
+      overflow-y: auto; /* Añadimos scroll vertical si hay muchas filas de amigos */
+    }
+  
+    .avatar-scroll > div {
+      width: auto;
+    }
+  
+    .avatar-scroll img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  }
+  
+  /* MODIFICACIÓN DEL MENÚ INFERIOR FIJO PARA BOTONES NEGROS */
+  .bottom-nav {
+    position: absolute; /* Cambiamos a absolute para posicionarlo dentro del contenedor */
+    bottom: 0; /* Lo pegamos a la parte inferior de su contenedor */
+    left: 0;
+    transform: none;
+    background-color: #fff; /* Fondo blanco */
     display: flex;
     justify-content: space-around;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.bottom-nav .nav-btn {
-    background: none;
-    border: none;
-    font-size: 1.5em;
-    color: var(--white); /* Iconos blancos */
-    cursor: pointer;
-    padding: 8px 15px;
-}
-
-.bottom-nav .nav-btn.active {
-    color: var(--accent-yellow); /* Amarillo para el botón activo (puedes cambiarlo a blanco si prefieres) */
-}
-
-/* Media Query para pantallas más pequeñas (ejemplo: hasta 600px de ancho) */
-@media (max-width: 600px) {
-    .profile-container {
-        margin: 10px;
-        padding-bottom: 55px; /* Ajustar padding inferior en pantallas pequeñas */
-        border-radius: 8px;
+    align-items: center;
+    padding: 10px 0;
+    border-radius: 0;
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    transition: all 0.3s ease;
+    width: 100%;
+  }
+  
+  /* Botones de navegación */
+  .nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #333; /* Iconos y texto en negro */
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .nav-btn svg {
+    width: 34px;
+    height: 34px;
+    fill: #333; /* Iconos SVG en negro */
+    opacity: 0.6;
+    margin-bottom: 4px;
+    transition: opacity 0.2s ease;
+  }
+  
+  .nav-btn.active svg,
+  .nav-btn:hover svg {
+    opacity: 1;
+  }
+  
+  /* ======== MEDIA QUERY: RESPONSIVE PARA MÓVIL ======== */
+  
+  @media screen and (max-width: 600px) {
+    #friends {
+      max-height: 150px; /* Ajustamos la altura máxima para móvil */
     }
-
-    header {
-        padding: 10px 15px;
+  
+    .avatar-scroll {
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      align-items: center;
     }
-
-    header h1 {
-        font-size: 1.3em;
+  
+    .avatar-scroll img {
+      width: 40px; /* Ajustamos el tamaño del avatar en móvil */
+      height: 40px;
     }
-
-    .user-info #profile-img {
-        width: 80px;
-        height: 80px;
-        margin-bottom: 10px;
-        padding-top: 15px;
+  
+    .bottom-nav {
+      position: fixed; /* Volvemos a fixed para la vista móvil */
+      bottom: 0;
+      left: 0;
+      transform: none;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      padding: 10px 0;
+      border-radius: 0;
+      box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.1);
+      z-index: 1000;
+      transition: all 0.3s ease;
+      width: 100%;
     }
-
-    .section {
-        padding: 0 15px;
+  
+    .nav-btn svg {
+      width: 26px;
+      height: 26px;
+      fill: #333;
     }
-
-    .section h2 {
-        font-size: 1.1em;
-        margin-bottom: 10px;
-        padding-bottom: 5px;
+  
+    .nav-btn {
+      font-size: 12px;
+      color: #333;
     }
-
-    .bottom-nav .nav-btn {
-        font-size: 1.3em;
-        padding: 6px 10px;
-    }
-}
+  }

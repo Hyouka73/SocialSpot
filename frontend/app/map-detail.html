@@ -5,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Búsqueda - SocialSpot</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css">
-  <link rel="stylesheet" href="../css/map.css">
+  <link rel="stylesheet" href="/frontend/CSS/map.css">
 </head>
 <body>
   <!-- Encabezado -->
   <header class="header">
-    <img src="./assets/back.png" alt="Retroceder" class="back-icon">
+    <img src="/frontend/assets/images/back.png" alt="Retroceder" class="back-icon">
     <h1>Búsqueda</h1>
-    <img src="/mapa/app/assets/Social_LogoV1.png" alt="SocialSpot" class="logo">
+    <img src="/frontend/assets/images/Social_LogoV1.png" alt="SocialSpot" class="logo">
   </header>
 
   <!-- Contenedor principal -->
@@ -26,12 +26,12 @@
         <h2 id="location-name">Selecciona un lugar</h2>
         <img id="location-image" src="" alt="Imagen del lugar" class="location-image hidden">
         <p id="location-address">Dirección: Cargando...</p>
-        <img src="/mapa/app/assets/share-icon.png" alt="Compartir" class="share-icon" onclick="shareLocation()">
+        <img src="/frontend/assets/images/share-icon.png" alt="Compartir" class="share-icon" onclick="shareLocation()">
       </div>
       <div id="comments-section" class="comments-section hidden">
         <h3 id="comments-title">Comentarios</h3>
         <div id="comments-list" class="comments-list"></div>
-        <img src="/mapa/app/assets/down-arrow.png" alt="Mostrar/Ocultar" id="toggle-comments" class="toggle-arrow">
+        <img src="/frontend/assets/images/down-arrow.png" alt="Mostrar/Ocultar" id="toggle-comments" class="toggle-arrow">
         <div id="add-comment-section" class="add-comment hidden">
           <textarea id="comment-input" placeholder="Escribe tu comentario..."></textarea>
           <div class="rating">
@@ -49,11 +49,11 @@
 
   <!-- Navegación inferior -->
   <nav class="nav-bar">
-    <img src="/mapa/app/assets/home.png" alt="Inicio" class="nav-icon">
-    <img src="/mapa/app/assets/user (1).png" alt="Perfil" class="nav-icon">
+    <img src="/frontend/assets/images/home.png" alt="Inicio" class="nav-icon">
+    <img src="/frontend/assets/images/user (1).png" alt="Perfil" class="nav-icon">
   </nav>
 
   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-  <script src="../data/map.js"></script>
+  <script src="/frontend/JS/map.js" type="module"></script>
 </body>
 </html>
