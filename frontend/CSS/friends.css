@@ -1,5 +1,5 @@
 .friends-container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
     min-height: 100vh;
@@ -124,6 +124,33 @@
     grid-column: 1 / -1;
 }
 
+.add-friend-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    margin-left: auto;
+}
+
+.add-friend-btn:hover {
+    background-color: #0056b3;
+    transform: scale(1.1);
+}
+
+.add-friend-btn.added {
+    background-color: #28a745;
+    cursor: default;
+}
+
 @media (max-width: 600px) {
     .friends-container {
         padding: 15px;
@@ -140,5 +167,11 @@
     .friend-avatar {
         width: 50px;
         height: 50px;
+    }
+    .add-friend-btn {
+        width: 24px;
+        height: 24px;
+        font-size: 1rem;
+        padding: 0;
     }
 }
