@@ -1,24 +1,35 @@
 const express = require('express');
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
-const cors = require('cors');
-const commentsRoutes = require('./routes/comments');
-
 dotenv.config();
+const cors = require('cors');
+const nano = require('nano')(process.env.COUCHDB_URI); // Conexión a CouchDB
+
 const app = express();
 
-// Conexión a MongoDB
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Conectado a MongoDB'))
-  .catch(err => console.error('Error al conectar a MongoDB:', err));
+// Configuración de CouchDB
+const commentsDB = nano.db.use('comments');
+
+(async () => {
+  try {
+    await nano.db.create('comments');
+    console.log('✅ Base "comments" creada en CouchDB');
+  } catch (err) {
+    if (err.error === 'file_exists') {
+      console.log('ℹ️ Base "comments" ya existe en CouchDB');
+    } else {
+      console.error('❌ Error en CouchDB:', err);
+    }
+  }
+})();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // Rutas
+const commentsRoutes = require('./routes/comments')(commentsDB);
 app.use('/api/comments', commentsRoutes);
 
-// Iniciar el servidor
+// Iniciar servidor
 const PORT = process.env.PORT || 3003;
-app.listen(PORT, () => console.log(`Comments Service corriendo en puerto ${PORT}`));
+app.listen(PORT, () => console.log(`🚀 Servidor en puerto ${PORT}`));
