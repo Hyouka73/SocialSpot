@@ -1,29 +1,67 @@
 // JS/profile.js
-import { API_USER_URL } from '../config.js';
 
-
-// Simular ID del usuario (idealmente viene del login o auth token)
-async function cargarPerfil() {
+// Función para obtener datos del usuario autenticado
+async function loadUserData() {
   try {
-    const response = await fetch(`${API_USER_URL}users/${userId}`);
-    if (!response.ok) throw new Error('Error al obtener usuario');
+    const userId = localStorage.getItem('currentUser');
+    const token  = localStorage.getItem('token');
+    if (!userId || !token) throw new Error('Usuario no autenticado');
 
-    const user = await response.json();
+    const response = await fetch(`http://localhost:3001/api/users/${userId}`, {
+      headers: { 'Authorization': `Bearer ${token}` }
+    });
+    if (!response.ok) throw new Error('Error al obtener datos del usuario');
 
-    // Asignar datos al DOM
-    document.getElementById('username').textContent = `${user.firstName} ${user.lastName}`;
-    document.getElementById('profile-img').src = user.avatar || '../assets/perfiles/carlos.jpg';
-    document.getElementById('description').textContent = user.description || 'Sin descripción';
-    document.getElementById('user-level').textContent = `🌟 Nivel ${user.level || 30}`;
-
-    // Si tenés medallas, lugares, amigos, podés seguir así:
-    // cargarMedallas(user.medals);
-    // cargarLugares(user.places);
-    // cargarAmigos(user.friends);
-
+    return await response.json();
   } catch (error) {
-    console.error('Error al cargar el perfil:', error.message);
+    console.error('Error al cargar datos del usuario:', error);
+    return null;
   }
 }
 
-cargarPerfil();
+// Función para mostrar los datos del usuario en el perfil
+async function displayUserData() {
+  const userData = await loadUserData();
+  if (!userData) return;
+
+  // Elementos del DOM
+  const nameEl  = document.getElementById('username');
+  const imgEl   = document.getElementById('profile-img');
+  const descEl  = document.getElementById('description');
+  const levelEl = document.getElementById('user-level');
+
+  // 1) Nombre: prioridad según datos disponibles
+  let displayName = '';
+  if (userData.fullName) {
+    displayName = userData.fullName;
+  } else if (userData.username) {
+    displayName = userData.username;
+  } else if (userData.firstName && userData.lastName) {
+    displayName = `${userData.firstName} ${userData.lastName}`;
+  } else if (userData.email) {
+    displayName = userData.email.split('@')[0];
+  } else {
+    displayName = `Usuario #${localStorage.getItem('currentUser').slice(0,4)}`;
+  }
+  nameEl.textContent = displayName;
+
+  // 2) Avatar
+  const rawAvatar   = userData.avatar || userData.photoURL || '';
+  const cleanAvatar = rawAvatar.replace(/\\/g, '/');
+  if (cleanAvatar) {
+    imgEl.src = cleanAvatar.startsWith('/') ? cleanAvatar : `/${cleanAvatar}`;
+  }
+
+  // 3) Descripción
+  if (descEl && userData.description) {
+    descEl.textContent = userData.description;
+  }
+
+  // 4) Nivel
+  if (levelEl && userData.level != null) {
+    levelEl.textContent = `🌟 Nivel ${userData.level}`;
+  }
+}
+
+// Ejecutar cuando el DOM esté cargado
+document.addEventListener('DOMContentLoaded', displayUserData);
